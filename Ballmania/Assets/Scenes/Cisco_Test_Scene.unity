@@ -241,6 +241,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1579131555 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1527224146728128, guid: 96a96bc4a6fd2274c81efdfb358dddde,
+    type: 2}
+  m_PrefabInternal: {fileID: 1615595635}
+--- !u!114 &1579131556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1579131555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc2c3dd25b7123429486187156a07d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  thrust: 5
+  jump: 5
+  dashpower: 2
 --- !u!1001 &1615595635
 Prefab:
   m_ObjectHideFlags: 0
@@ -285,7 +305,8 @@ Prefab:
       propertyPath: jump
       value: 3
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114579514449517774, guid: 96a96bc4a6fd2274c81efdfb358dddde, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 96a96bc4a6fd2274c81efdfb358dddde, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &1774719456
