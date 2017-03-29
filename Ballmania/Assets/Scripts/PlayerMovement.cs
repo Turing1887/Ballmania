@@ -16,10 +16,12 @@ public class PlayerMovement : MonoBehaviour {
     public float dashDistance = 10;
 
     private CharacterController controller;
+    private Dash meh;
 
 	void Start () {
         controller = GetComponent<CharacterController>();
-	}
+        meh = gameObject.GetComponent<Dash>();
+    }
 	
     //Movement & Jump
 	void Update () {
@@ -49,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         if(Input.GetButtonDown("Dash") && delay > 60)
         {
             controller.Move(new Vector3(localVector.x * dashDistance * Time.deltaTime, localVector.y * Time.deltaTime, localVector.z * dashDistance * Time.deltaTime));
+            //meh.AddImpact(localVector, dashDistance);
             delay = 0;
         }
         else
