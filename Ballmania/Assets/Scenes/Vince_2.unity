@@ -226,9 +226,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 30
   maxVel: 5
-  jumpForce: 5
+  dashForce: 1
+  jumpForce: 10
   nextDash: 0
-  cooldown: 1
+  cooldown: 0.5
 --- !u!135 &414606793
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceleration: 30
   maxVel: 5
+  dashForce: 0
   jumpForce: 5
   nextDash: 0
   cooldown: 1
