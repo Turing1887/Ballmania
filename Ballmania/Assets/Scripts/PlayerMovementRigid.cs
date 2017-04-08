@@ -7,6 +7,7 @@ public class PlayerMovementRigid : MonoBehaviour
 
     public float acceleration;
     public float maxVel;
+    public float dashForce;
     public float jumpForce;
     public float nextDash = 0.0f;
     public float cooldown = 5.0f;
@@ -32,20 +33,26 @@ public class PlayerMovementRigid : MonoBehaviour
 
         if (isGrounded)
         {
-            Debug.Log("Grounded");
-            if (Input.GetButtonDown("Jump") && Time.time >= nextDash)
+            //Debug.Log("Grounded");
+            if (Input.GetButtonDown("Jump"))
             {
                 verticalVelocity = jumpForce;
-                nextDash = Time.time + cooldown;
+                moveVector.x = 0;
+                moveVector.z = 0;
             }
         }
         else
         {
-            Debug.Log("Not Grounded");
+            //Debug.Log("Not Grounded");
             verticalVelocity = 0;
         }
 
-        
+        if (Input.GetButtonDown("Dash") && Time.time >= nextDash)
+        {
+            verticalVelocity = dashForce;
+            nextDash = Time.time + cooldown;
+        }
+
 
         moveVector.y = 0;
         moveVector.Normalize();
@@ -54,9 +61,10 @@ public class PlayerMovementRigid : MonoBehaviour
 
         if (verticalVelocity > 0)
         {
+            Debug.Log("Dash");
             rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Impulse);
         }
-        else
+        else if(isGrounded == true)
         {
             if (rb.velocity.magnitude > maxVel && Time.time >= nextDash)
             {
