@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class PlayerReady : MonoBehaviour {
 
 	public bool[] isReady;
-	int readyCounter;
 	GameObject[] ready_txt;
 
 	void Start () {
@@ -17,37 +16,39 @@ public class PlayerReady : MonoBehaviour {
 		ready_txt [3] = transform.FindChild ("ready_p4").gameObject;
 
 		isReady = new bool[4];
-		readyCounter = 0;
+
 	}
 
 	void Update () {
-		if(Input.GetButton("Activate")){
-			for(int i = 0;i < isReady.Length;i++){
-				if (isReady [i] == false) {
-					isReady [i] = true;
-					readyCounter++;
-					switch (readyCounter) {
-					case 1:
-						ready_txt [0].SetActive (true);
-						break;
-					case 2:
-						ready_txt [1].SetActive (true);
-						break;
-					case 3:
-						ready_txt [2].SetActive (true);
-						break;
-					case 4:
-						ready_txt [3].SetActive (true);
-						break;
-
-					}
-
-				} else {
-					continue;
-				}
-				break;
-
-			}
-		}	
+		if(Input.GetButtonDown("Activate_1")){
+			ReadySlot ("Player_1");
+		}
+		else if(Input.GetButtonDown("Activate_2")){
+			ReadySlot ("Player_2");
+		}
+		else if(Input.GetButtonDown("Activate_3")){
+			ReadySlot ("Player_3");
+		}
+		else if(Input.GetButtonDown("Activate_4")){
+			ReadySlot ("Player_4");
+		}
 	}
+
+	void ReadySlot(string controllerName){
+		for(int i = 0; i < isReady.Length; i++){
+			if (isReady [i] == false) {
+				isReady [i] = true;
+				ready_txt [i].SetActive (true);
+				PlayerPrefs.SetInt (controllerName, i);
+				return;
+
+			} 
+
+		}
+
+	}
+
+
+
+
 }
