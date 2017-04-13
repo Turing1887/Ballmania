@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 143568154726624400}
   - component: {fileID: 114579514449517774}
   m_Layer: 0
-  m_Name: ball_1
+  m_Name: redball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39,7 +39,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1527224146728128}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 0.47456694, y: 3.24, z: 0.23544216}
+  m_LocalPosition: {x: -0.57993615, y: 6.94, z: 1.9376552}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,6 +75,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33850883458262298
 MeshFilter:
