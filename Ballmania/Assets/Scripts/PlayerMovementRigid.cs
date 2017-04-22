@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovementRigid : MonoBehaviour
 {
-
+    public Vector3 scaleVector;
     public float acceleration;
     public float maxVel;
     public float dashForce;
@@ -64,7 +64,7 @@ public class PlayerMovementRigid : MonoBehaviour
             Debug.Log("Dash");
             rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Impulse);
         }
-        else if(isGrounded == true)
+        else if (isGrounded == true)
         {
             if (rb.velocity.magnitude > maxVel && Time.time >= nextDash)
             {
@@ -74,15 +74,15 @@ public class PlayerMovementRigid : MonoBehaviour
             {
                 rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Force);
             }
-            
+
         }
-        
+
     }
 
     private bool isGrounded = false;
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "ground")
         {
             isGrounded = true;
         }
@@ -90,6 +90,8 @@ public class PlayerMovementRigid : MonoBehaviour
         {
             isGrounded = false;
         }
+
+
     }
     private void OnCollisionExit(Collision collision)
     {
@@ -98,4 +100,35 @@ public class PlayerMovementRigid : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    public IEnumerator StopSpeedUp()
+    {
+        yield return new WaitForSeconds(GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().durationSpeedUp);
+        acceleration -= GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().accelerationPowerUp;
+        maxVel -= GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().maxVelPowerUp;
+        GameObject.FindGameObjectWithTag("SpeedUp").transform.Translate(100, 100, 100);
+        Destroy(GameObject.FindWithTag("SpeedUp"));
+
+    }
+
+    public IEnumerator StopMultipleDash()
+    {
+        yield return new WaitForSeconds(GameObject.FindWithTag("MultipleDash").GetComponent<MultipleDash>().durationSuperDash);
+        GameObject.FindGameObjectWithTag("MultipleDash").transform.Translate(100, 100, 100);
+        Destroy(GameObject.FindWithTag("MultipleDash"));
+        cooldown = 5f;
+
+    }
+
+    public IEnumerator StopSuperMass()
+    {
+        yield return new WaitForSeconds(GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().durationSuperMass);
+        GameObject.FindWithTag("Player").transform.localScale -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().scaleVector;
+        rb.GetComponent<Rigidbody>().mass -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().superMass;
+        acceleration -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().superMassAcceleration;
+        GameObject.FindGameObjectWithTag("SuperMass").transform.Translate(100, 100, 100);
+        Destroy(GameObject.FindWithTag("SuperMass"));
+
+    }
+
 }

@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Fire
   - ground
+  - SpeedUp
+  - SuperMass
+  - MultipleDash
   layers:
   - Default
   - TransparentFX
