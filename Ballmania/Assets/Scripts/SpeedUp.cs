@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpeedUp : MonoBehaviour
 {
 
+    public float rotationSpeed = 25f;
     public float durationSpeedUp;
     public float accelerationPowerUp;
     public float maxVelPowerUp;
@@ -18,7 +19,7 @@ public class SpeedUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.Rotate(new Vector3(0, 0, Time.deltaTime * rotationSpeed));
     }
 
     void OnTriggerEnter(Collider other)

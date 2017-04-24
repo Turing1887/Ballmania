@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SuperMass : MonoBehaviour
 {
+    public float rotationSpeed = 25f;
     public float durationSuperMass;
     public Vector3 scaleVector;
     public float superMass;
@@ -18,7 +19,7 @@ public class SuperMass : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        transform.Rotate(new Vector3(0, 0, Time.deltaTime * rotationSpeed));
     }
 
     void OnTriggerEnter(Collider other)
