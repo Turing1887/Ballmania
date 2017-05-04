@@ -29,8 +29,9 @@ public class SuperMass : MonoBehaviour
         {
             PlayerMovementRigid playerScript = other.gameObject.GetComponent<PlayerMovementRigid>();
 
-            if (playerScript)
+            if (playerScript && playerScript.canUsePowerUp == true)
             {
+                playerScript.canUsePowerUp = false;
                 GameObject.FindWithTag("Player").GetComponent<Rigidbody>().mass += superMass;
                 playerScript.acceleration += superMassAcceleration;
                 GameObject.FindWithTag("Player").transform.localScale += scaleVector;

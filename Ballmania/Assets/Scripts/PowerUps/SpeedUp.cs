@@ -28,9 +28,11 @@ public class SpeedUp : MonoBehaviour
         if (other.tag.Equals("Player"))
         {
             PlayerMovementRigid playerScript = other.gameObject.GetComponent<PlayerMovementRigid>();
+            
 
-            if (playerScript)
+            if (playerScript && playerScript.canUsePowerUp == true)
             {
+                playerScript.canUsePowerUp = false;
                 playerScript.acceleration += accelerationPowerUp;
                 playerScript.maxVel += maxVelPowerUp;
                 GameObject.FindGameObjectWithTag("SpeedUp").transform.Translate(100, 100, 100);

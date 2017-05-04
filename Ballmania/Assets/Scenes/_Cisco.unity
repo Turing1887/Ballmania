@@ -160,6 +160,7 @@ MonoBehaviour:
   jumpForce: 2
   nextDash: 0
   cooldown: 5
+  canUsePowerUp: 0
 --- !u!135 &955993040
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -275,7 +276,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: e30772158cac13d4194e462e4d8e8dd8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -526,7 +527,7 @@ MonoBehaviour:
   powerUps:
   - {fileID: 1531952870165146, guid: 0581510af5541ab4ba423cc66180a9b8, type: 2}
   - {fileID: 1678121702467400, guid: 9ec153b38f1b39b4c8b00874d80ed18c, type: 2}
-  - {fileID: 1813313849287328, guid: df52428ab15b1b84db8668bcab63bb76, type: 2}
+  - {fileID: 1773049457886762, guid: 03570ca0b99accd4f99148628866a195, type: 2}
   spawnTime: 4
   spawnPoints:
   - {fileID: 2055582659}

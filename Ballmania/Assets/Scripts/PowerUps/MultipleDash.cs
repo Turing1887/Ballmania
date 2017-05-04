@@ -24,10 +24,11 @@ public class MultipleDash : MonoBehaviour {
         {
             PlayerMovementRigid playerScript = other.gameObject.GetComponent<PlayerMovementRigid>();
 
-            if (playerScript)
+            if (playerScript && playerScript.canUsePowerUp == true)
             {
+                playerScript.canUsePowerUp = false;
                 playerScript.cooldown = cooldownPowerUp;
-
+                GameObject.FindGameObjectWithTag("MultipleDash").transform.Translate(100, 100, 100);
                 StartCoroutine(playerScript.StopMultipleDash());
             }
             Debug.Log("Super Dash enabled");
