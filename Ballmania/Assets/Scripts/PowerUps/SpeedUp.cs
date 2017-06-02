@@ -27,17 +27,11 @@ public class SpeedUp : MonoBehaviour
 
         if (other.tag.Equals("Player"))
         {
-            PlayerMovementRigid playerScript = other.gameObject.GetComponent<PlayerMovementRigid>();
-            
+            PowerUpManager powerManagerScript = other.gameObject.GetComponent<PowerUpManager>();
 
-            if (playerScript && playerScript.canUsePowerUp == true)
-            {
-                playerScript.canUsePowerUp = false;
-                playerScript.acceleration += accelerationPowerUp;
-                playerScript.maxVel += maxVelPowerUp;
-                GameObject.FindGameObjectWithTag("SpeedUp").transform.Translate(100, 100, 100);
-                StartCoroutine(playerScript.StopSpeedUp());
-            }
+            powerManagerScript.isSpeedUp = true;
+            Destroy(this.gameObject);
+           
             Debug.Log("SuperSpeed activated");
         }
 

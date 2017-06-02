@@ -103,37 +103,6 @@ public class PlayerMovementRigid : MonoBehaviour
         }
     }
 
-    public IEnumerator StopSpeedUp()
-    {
-        yield return new WaitForSeconds(GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().durationSpeedUp);
-        acceleration -= GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().accelerationPowerUp;
-        maxVel -= GameObject.FindWithTag("SpeedUp").GetComponent<SpeedUp>().maxVelPowerUp;
-        GameObject.FindGameObjectWithTag("SpeedUp").transform.Translate(100, 100, 100);
-        canUsePowerUp = true;
-        Destroy(GameObject.FindWithTag("SpeedUp"));
-
-    }
-
-    public IEnumerator StopMultipleDash()
-    {
-        yield return new WaitForSeconds(GameObject.FindWithTag("MultipleDash").GetComponent<MultipleDash>().durationSuperDash);
-        GameObject.FindGameObjectWithTag("MultipleDash").transform.Translate(100, 100, 100);
-        cooldown = 5f;
-        canUsePowerUp = true;
-        Destroy(GameObject.FindWithTag("MultipleDash"));
-
-    }
-
-    public IEnumerator StopSuperMass()
-    {
-        yield return new WaitForSeconds(GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().durationSuperMass);
-        GameObject.FindWithTag("Player").transform.localScale -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().scaleVector;
-        rb.GetComponent<Rigidbody>().mass -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().superMass;
-        acceleration -= GameObject.FindWithTag("SuperMass").GetComponent<SuperMass>().superMassAcceleration;
-        canUsePowerUp = true;
-        GameObject.FindGameObjectWithTag("SuperMass").transform.Translate(100, 100, 100);
-        Destroy(GameObject.FindWithTag("SuperMass"));
-
-    }
+    
 
 }

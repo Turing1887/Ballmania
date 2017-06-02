@@ -9,6 +9,7 @@ TagManager:
   - SpeedUp
   - SuperMass
   - MultipleDash
+  - SpeedUpCached
   layers:
   - Default
   - TransparentFX

@@ -5,10 +5,7 @@ using UnityEngine;
 public class SuperMass : MonoBehaviour
 {
     public float rotationSpeed = 25f;
-    public float durationSuperMass;
-    public Vector3 scaleVector;
-    public float superMass;
-    public float superMassAcceleration;
+    
 
     // Use this for initialization
     void Start()
@@ -27,17 +24,9 @@ public class SuperMass : MonoBehaviour
 
         if (other.tag.Equals("Player"))
         {
-            PlayerMovementRigid playerScript = other.gameObject.GetComponent<PlayerMovementRigid>();
-
-            if (playerScript && playerScript.canUsePowerUp == true)
-            {
-                playerScript.canUsePowerUp = false;
-                GameObject.FindWithTag("Player").GetComponent<Rigidbody>().mass += superMass;
-                playerScript.acceleration += superMassAcceleration;
-                GameObject.FindWithTag("Player").transform.localScale += scaleVector;
-                GameObject.FindGameObjectWithTag("SuperMass").transform.Translate(100, 100, 100);
-                StartCoroutine(playerScript.StopSuperMass());
-            }
+            PowerUpManager powerManager = other.gameObject.GetComponent<PowerUpManager>();
+            powerManager.isMassUp = true;
+            Destroy(this.gameObject);
 
             Debug.Log("Enter");
         }
