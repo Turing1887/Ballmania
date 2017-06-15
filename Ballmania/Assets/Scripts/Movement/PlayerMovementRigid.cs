@@ -5,14 +5,13 @@ using UnityEngine.Networking;
 
 public class PlayerMovementRigid : NetworkBehaviour
 {
-    public Vector3 scaleVector;
     public float acceleration;
     public float maxVel;
     public float dashForce;
+    public float dashDuration;
     public float jumpForce;
     public float nextDash = 0.0f;
     public float cooldown = 5.0f;
-    public bool canUsePowerUp;
 
     private Rigidbody rb;
 
@@ -24,11 +23,10 @@ public class PlayerMovementRigid : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        canUsePowerUp = true;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (isLocalPlayer)
         {
@@ -53,32 +51,31 @@ public class PlayerMovementRigid : NetworkBehaviour
                 verticalVelocity = 0;
             }
 
-            if (Input.GetButtonDown("Dash") && Time.time >= nextDash)
-            {
-                verticalVelocity = dashForce;
-                nextDash = Time.time + cooldown;
-            }
-
-
             moveVector.y = 0;
             moveVector.Normalize();
             moveVector *= acceleration;
             moveVector.y = verticalVelocity;
 
-            if (verticalVelocity > 0)
+            if (Input.GetButtonDown("Dash") && nextDash >= 3f)
             {
-                Debug.Log("Dash");
-                rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Impulse);
+                //verticalVelocity = dashForce;  
+                rb.AddForce(moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
+                nextDash = 0f;
             }
-            else if (isGrounded == true)
+            else
             {
-                if (rb.velocity.magnitude > maxVel && Time.time >= nextDash)
+                nextDash += Time.deltaTime;
+            }
+
+            if (isGrounded)
+            {
+                if (rb.velocity.magnitude > maxVel && nextDash >= dashDuration)
                 {
                     rb.velocity = rb.velocity.normalized * maxVel;
                 }
                 else
                 {
-                    rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Force);
+                    rb.AddForce(moveVector * Time.deltaTime * acceleration, ForceMode.Impulse);
                 }
 
             }
@@ -98,6 +95,13 @@ public class PlayerMovementRigid : NetworkBehaviour
         {
             isGrounded = false;
         }
+        if (collision.gameObject.tag == "Player")
+        {
+            if (nextDash >= Time.time)
+            {
+                collision.gameObject.GetComponent<Rigidbody>().AddForce(moveVector * 2, ForceMode.Impulse);
+            }
+        }
 
 
     }
@@ -109,6 +113,10 @@ public class PlayerMovementRigid : NetworkBehaviour
         }
     }
 
-    
+    //initialize things on starting the game but only for the local Player
+    public override void OnStartLocalPlayer()
+    {
+        //GetComponent<MeshRenderer>().material.color = Color.blue;
+    }
 
 }
