@@ -8,14 +8,14 @@ public class PowerUpManager : MonoBehaviour {
     public bool isDashUp;
     PlayerMovementRigid playerManager;
     public float durationSpeedUp;
-    public float accelerationPowerUp;
-    public float maxVelPowerUp;
-    public float cooldownPowerUp;
+    public float addAccelerationSpeedUp;
+    public float addMaxSpeedUp;
+    public float setValueNextDashSuperDash;
     public float durationSuperDash;
     public float durationSuperMass;
-    public Vector3 scaleVector;
-    public float superMass;
-    public float superMassAcceleration;
+    public Vector3 addValuesForSuperMass;
+    public float addMassSuperMass;
+    public float addAccelerationSuperMass;
 
     float cacheCooldown;
 
@@ -38,8 +38,8 @@ public class PowerUpManager : MonoBehaviour {
         {
             if (tempSpeed == 0)
             {
-                playerManager.acceleration += accelerationPowerUp;
-                playerManager.maxVel += maxVelPowerUp;
+                playerManager.acceleration += addAccelerationSpeedUp;
+                playerManager.maxVel += addMaxSpeedUp;
                 tempSpeed = 1;
             }
             StartCoroutine(SpeedUp());
@@ -49,9 +49,9 @@ public class PowerUpManager : MonoBehaviour {
         {
             if (tempMass == 0)
             {
-                transform.localScale += scaleVector;
-                GetComponent<Rigidbody>().mass += superMass;
-                playerManager.acceleration += superMassAcceleration;
+                transform.localScale += addValuesForSuperMass;
+                GetComponent<Rigidbody>().mass += addMassSuperMass;
+                playerManager.acceleration += addAccelerationSuperMass;
                 tempMass = 1;
             }
             StartCoroutine(SuperMass());
@@ -62,7 +62,7 @@ public class PowerUpManager : MonoBehaviour {
             if (tempDash == 0)
             {
                 cacheCooldown = playerManager.cooldown;
-                playerManager.cooldown = cooldownPowerUp;
+                playerManager.cooldown = setValueNextDashSuperDash;
                 tempDash = 1;
             }
             StartCoroutine(MultipleDash());
@@ -76,8 +76,8 @@ public class PowerUpManager : MonoBehaviour {
     public IEnumerator SpeedUp()
     {
         yield return new WaitForSeconds(durationSpeedUp);
-        playerManager.acceleration -= accelerationPowerUp;
-        playerManager.maxVel -= maxVelPowerUp;
+        playerManager.acceleration -= addAccelerationSpeedUp;
+        playerManager.maxVel -= addMaxSpeedUp;
         isSpeedUp = false;
         tempSpeed = 0;
         //GameObject.FindGameObjectWithTag("SpeedUpCached").transform.Translate(100, 100, 100);
@@ -99,9 +99,9 @@ public class PowerUpManager : MonoBehaviour {
     public IEnumerator SuperMass()
     {
         yield return new WaitForSeconds(durationSuperMass);
-        transform.localScale -= scaleVector;
-        GetComponent<Rigidbody>().mass -= superMass;
-        playerManager.acceleration -= superMassAcceleration;
+        transform.localScale -= addValuesForSuperMass;
+        GetComponent<Rigidbody>().mass -= addMassSuperMass;
+        playerManager.acceleration -= addAccelerationSuperMass;
         tempMass = 0;
         //GameObject.FindGameObjectWithTag("SuperMass").transform.Translate(100, 100, 100);
         //Destroy(GameObject.FindWithTag("SuperMass"));
