@@ -168,14 +168,14 @@ MonoBehaviour:
   isMassUp: 0
   isDashUp: 0
   durationSpeedUp: 3
-  accelerationPowerUp: 10
-  maxVelPowerUp: 20
-  cooldownPowerUp: 3
+  addAccelerationSpeedUp: 20
+  addMaxSpeedUp: 20
+  setValueNextDashSuperDash: 0
   durationSuperDash: 3
   durationSuperMass: 3
-  scaleVector: {x: 2, y: 2, z: 2}
-  superMass: 10
-  superMassAcceleration: 30
+  addValuesForSuperMass: {x: 50, y: 50, z: 50}
+  addMassSuperMass: 20
+  addAccelerationSuperMass: 20
 --- !u!114 &114996783149336406
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -5,9 +5,7 @@ using UnityEngine;
 public class MultipleDash : MonoBehaviour {
 
     public float rotationSpeed = 25f;
-    public float cooldownPowerUp;
-    public float durationSuperDash;
-
+ 
 	// Use this for initialization
 	void Start () {
 		
