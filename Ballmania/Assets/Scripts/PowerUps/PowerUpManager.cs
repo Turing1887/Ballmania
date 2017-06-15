@@ -90,6 +90,7 @@ public class PowerUpManager : MonoBehaviour {
     {
         yield return new WaitForSeconds(durationSuperDash);
         playerManager.cooldown = cacheCooldown;
+        isDashUp = false;
         tempDash = 0;
         //GameObject.FindGameObjectWithTag("MultipleDash").transform.Translate(100, 100, 100);
         //Destroy(GameObject.FindWithTag("MultipleDash"));
@@ -102,6 +103,7 @@ public class PowerUpManager : MonoBehaviour {
         transform.localScale -= addValuesForSuperMass;
         GetComponent<Rigidbody>().mass -= addMassSuperMass;
         playerManager.acceleration -= addAccelerationSuperMass;
+        isMassUp = false;
         tempMass = 0;
         //GameObject.FindGameObjectWithTag("SuperMass").transform.Translate(100, 100, 100);
         //Destroy(GameObject.FindWithTag("SuperMass"));

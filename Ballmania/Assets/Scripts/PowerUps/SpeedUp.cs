@@ -6,10 +6,7 @@ public class SpeedUp : MonoBehaviour
 {
 
     public float rotationSpeed = 25f;
-    public float durationSpeedUp;
-    public float accelerationPowerUp;
-    public float maxVelPowerUp;
-
+    
     // Use this for initialization
     void Start()
     {
