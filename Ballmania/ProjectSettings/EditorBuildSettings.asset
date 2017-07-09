@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: efde824140f660f4ba734261e1c372cd
   - enabled: 0
@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/_Cisco.unity
     guid: 959dfb86824e39e44910690ac19ad208
+  - enabled: 1
+    path: Assets/Scenes/NetworkLobby.unity
+    guid: 0dcd3f2259b0a8d47a712c6d0690d20c
