@@ -56,7 +56,7 @@ public class PlayerMovementRigid : NetworkBehaviour
             moveVector *= acceleration;
             moveVector.y = verticalVelocity;
 
-            if (Input.GetButtonDown("Dash") && nextDash >= 3f)
+            if (Input.GetButtonDown("Dash") && nextDash >= cooldown)
             {
                 //verticalVelocity = dashForce;  
                 rb.AddForce(moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
@@ -99,7 +99,8 @@ public class PlayerMovementRigid : NetworkBehaviour
         {
             if (nextDash >= Time.time)
             {
-                collision.gameObject.GetComponent<Rigidbody>().AddForce(moveVector * 2, ForceMode.Impulse);
+                CmdCollision(collision);
+                Debug.Log("Collision");
             }
         }
 
@@ -112,6 +113,14 @@ public class PlayerMovementRigid : NetworkBehaviour
             isGrounded = false;
         }
     }
+
+    [Command]
+    void CmdCollision(Collision collision)
+    {
+        collision.gameObject.GetComponent<Rigidbody>().AddForce(moveVector * 10, ForceMode.Impulse);
+    }
+
+
 
     //initialize things on starting the game but only for the local Player
     public override void OnStartLocalPlayer()
