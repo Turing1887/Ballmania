@@ -37,6 +37,7 @@ public class AutoZoomCamera : MonoBehaviour {
         Rect boundingBox = CalculateTargetsBoundingBox();
         Vector3 newPos = CalculateCameraPosition(boundingBox);
         newPos.y = CalculateZSize(boundingBox);
+        newPos.z -= newPos.y / 2;
         transform.position = newPos;
     }
 
