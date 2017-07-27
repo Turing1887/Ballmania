@@ -93,7 +93,7 @@ public class MovementManagerScript : NetworkBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         // Ground Check
-        if (collision.gameObject.tag == "ground")
+        if (collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }

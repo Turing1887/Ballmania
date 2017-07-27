@@ -92,7 +92,7 @@ Rigidbody:
   m_GameObject: {fileID: 1592839350911672}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0.3
+  m_Drag: 0.5
   m_AngularDrag: 0.3
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -142,9 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d26d2a5071e77cc46b5b83534da42112, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 5
-  maxVel: 20
-  dashForce: 50
+  acceleration: 2
+  maxVel: 15
+  dashForce: 200
   dashDuration: 0.5
   nextDash: 0
   cooldown: 2
