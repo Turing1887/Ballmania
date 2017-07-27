@@ -15,20 +15,28 @@ public class MovementManagerScript : NetworkBehaviour {
 
     public float jumpForce;
 
+    public float deathDepth = 5f;
 
     private Rigidbody rb;
 
     private Vector3 moveVector;
     private float verticalVelocity;
 
+    LifeManagement lM;
 
     void Start () {
         rb = GetComponent<Rigidbody>();
+        lM = GameObject.Find("Game Manager").GetComponent<LifeManagement>();
     }
 
 	void Update () {
         if (isLocalPlayer)
         {
+            if(transform.position.y < deathDepth)
+            {
+                //lM.LifeDown();
+                Destroy(gameObject);
+            }
             // Tasten auslesen um Bewegungsvektor herauszufinden
             moveVector = Vector3.zero;
             moveVector.x = Input.GetAxis("Horizontal") * Time.deltaTime;
