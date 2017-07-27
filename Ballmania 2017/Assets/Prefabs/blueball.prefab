@@ -21,6 +21,10 @@ GameObject:
   - component: {fileID: 4099193504071096}
   - component: {fileID: 33492146321319982}
   - component: {fileID: 23845046656898806}
+  - component: {fileID: 54874465994907940}
+  - component: {fileID: 114753995510816718}
+  - component: {fileID: 114038439027138800}
+  - component: {fileID: 135729283998452028}
   m_Layer: 0
   m_Name: blueball
   m_TagString: Untagged
@@ -80,3 +84,80 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1404151047020190}
   m_Mesh: {fileID: 4300000, guid: 52740658b755105428afd7435a591152, type: 3}
+--- !u!54 &54874465994907940
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404151047020190}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0.5
+  m_AngularDrag: 0.3
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &114038439027138800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404151047020190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d26d2a5071e77cc46b5b83534da42112, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceleration: 0
+  maxVel: 0
+  dashForce: 0
+  dashDuration: 0
+  nextDash: 0
+  cooldown: 5
+  jumpForce: 0
+--- !u!114 &114753995510816718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404151047020190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 142
+    i1: 60
+    i2: 52
+    i3: 127
+    i4: 14
+    i5: 76
+    i6: 114
+    i7: 212
+    i8: 217
+    i9: 195
+    i10: 247
+    i11: 19
+    i12: 203
+    i13: 114
+    i14: 238
+    i15: 175
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!135 &135729283998452028
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404151047020190}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.01
+  m_Center: {x: -0.0000000023283064, y: -0.000000006053596, z: 0}
