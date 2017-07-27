@@ -5,9 +5,6 @@ using UnityEngine;
 public class AutoZoomCamera : MonoBehaviour {
 
     [SerializeField]
-    Transform[] targets;
-
-    [SerializeField]
     float boundingBoxPadding = 2f;
 
     [SerializeField]
@@ -22,10 +19,17 @@ public class AutoZoomCamera : MonoBehaviour {
     float maxWidth;
     float maxHeight;
 
+    private GameObject[] player;
+
     void Awake()
     {
         camera = GetComponent<Camera>();
         camera.orthographic = false;
+    }
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectsWithTag("Player");
     }
 
     void LateUpdate()
@@ -44,9 +48,9 @@ public class AutoZoomCamera : MonoBehaviour {
         float minZ = Mathf.Infinity;
         float maxZ = Mathf.NegativeInfinity;
 
-        foreach (Transform target in targets)
+        foreach (GameObject target in player)
         {
-            Vector3 position = target.position;
+            Vector3 position = target.transform.position;
 
             minX = Mathf.Min(minX, position.x);
             minZ = Mathf.Min(minZ, position.z);
