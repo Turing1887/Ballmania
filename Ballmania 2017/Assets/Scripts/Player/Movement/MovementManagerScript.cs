@@ -16,17 +16,18 @@ public class MovementManagerScript : NetworkBehaviour {
     public float jumpForce;
 
     public float deathDepth = 5f;
+    public int damage = 1;
 
     private Rigidbody rb;
 
     private Vector3 moveVector;
     private float verticalVelocity;
 
-    LifeManagement lM;
+    Health health;
 
     void Start () {
         rb = GetComponent<Rigidbody>();
-        lM = GameObject.Find("Game Manager").GetComponent<LifeManagement>();
+        health = gameObject.GetComponent<Health>();
     }
 
 	void Update () {
@@ -34,8 +35,8 @@ public class MovementManagerScript : NetworkBehaviour {
         {
             if(transform.position.y < deathDepth)
             {
-                //lM.LifeDown();
-                Destroy(gameObject);
+                health.TakeDamage(damage);
+                rb.velocity = Vector3.zero;
             }
             // Tasten auslesen um Bewegungsvektor herauszufinden
             moveVector = Vector3.zero;

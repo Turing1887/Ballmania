@@ -20,8 +20,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4867863766563524}
   - component: {fileID: 33252577932711592}
-  - component: {fileID: 135004019656821326}
   - component: {fileID: 23414710501033468}
+  - component: {fileID: 135004019656821326}
   - component: {fileID: 114340918867140522}
   - component: {fileID: 114777137934453134}
   - component: {fileID: 54185260888065302}
@@ -149,6 +149,7 @@ MonoBehaviour:
   nextDash: 0
   cooldown: 2
   jumpForce: 0
+  deathDepth: -5
 --- !u!135 &135004019656821326
 SphereCollider:
   m_ObjectHideFlags: 1
