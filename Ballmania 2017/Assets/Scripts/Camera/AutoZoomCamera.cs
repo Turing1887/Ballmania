@@ -14,10 +14,12 @@ public class AutoZoomCamera : MonoBehaviour {
     float zoomSpeed = 20f;
 
     Camera camera;
+    public Vector3 normPos;
 
     Vector2 boundingBoxCenter;
     float maxWidth;
     float maxHeight;
+    private Vector3 newPos;
 
     private GameObject[] player;
 
@@ -34,10 +36,18 @@ public class AutoZoomCamera : MonoBehaviour {
 
     void LateUpdate()
     {
-        Rect boundingBox = CalculateTargetsBoundingBox();
-        Vector3 newPos = CalculateCameraPosition(boundingBox);
-        newPos.y = CalculateZSize(boundingBox);
-        newPos.z -= newPos.y / 2;
+        player = GameObject.FindGameObjectsWithTag("Player");
+        if(player != null && player.Length > 0)
+        {
+            Rect boundingBox = CalculateTargetsBoundingBox();
+            newPos = CalculateCameraPosition(boundingBox);
+            newPos.y = CalculateZSize(boundingBox);
+            newPos.z -= newPos.y / 2;
+        }
+        else
+        {
+            newPos = normPos;
+        }
         transform.position = newPos;
     }
 
@@ -58,6 +68,7 @@ public class AutoZoomCamera : MonoBehaviour {
             maxX = Mathf.Max(maxX, position.x);
             maxZ = Mathf.Max(maxZ, position.z);
         }
+        
         maxWidth = Mathf.Abs((minX - maxX)) + 2*boundingBoxPadding;
         maxHeight = Mathf.Abs((minZ - maxZ)) + 2*boundingBoxPadding;
         // returned ein Rechteck aus den Min und Max Werten

@@ -8,7 +8,12 @@ public class Health : NetworkBehaviour {
 
     public const int maxHealth = 5;
 
+    [SyncVar(hook = "OnChangeHealth")]
     public int currentHealth = maxHealth;
+
+    public GameObject healthUI;
+
+    private RectTransform healthBar;
 
     private NetworkStartPosition[] spawnPoints;
 
@@ -16,6 +21,10 @@ public class Health : NetworkBehaviour {
 		if(isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+
+            GameObject playerUI = Instantiate(healthUI) as GameObject;
+            playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
+            healthBar = (RectTransform)playerUI.gameObject.transform.GetChild(1).GetChild(0);
         }
 	}
 	
@@ -32,6 +41,11 @@ public class Health : NetworkBehaviour {
                 Destroy(gameObject);
         }
         RpcRespawn();
+    }
+
+    void OnChangeHealth (int currentHealth)
+    {
+        healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
     }
 
     [ClientRpc]

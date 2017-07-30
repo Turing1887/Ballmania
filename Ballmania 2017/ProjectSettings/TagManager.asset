@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Fire
   - Ground
+  - Canvas
+  - HealthUI
+  - PlayerInfo
   layers:
   - Default
   - TransparentFX
