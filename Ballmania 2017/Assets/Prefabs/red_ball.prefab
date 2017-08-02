@@ -166,7 +166,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 100
   healthUI: {fileID: 1252281480646894, guid: 36fa887db7a79354186f85cdd2612694, type: 2}
-  canvas: {fileID: 0}
 --- !u!114 &114900353095840568
 MonoBehaviour:
   m_ObjectHideFlags: 1

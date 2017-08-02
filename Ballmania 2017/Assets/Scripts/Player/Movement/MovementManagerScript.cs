@@ -35,6 +35,7 @@ public class MovementManagerScript : NetworkBehaviour {
         {
             if(transform.position.y < deathDepth)
             {
+                Debug.Log("damage");
                 health.TakeDamage(damage);
                 rb.velocity = Vector3.zero;
             }
