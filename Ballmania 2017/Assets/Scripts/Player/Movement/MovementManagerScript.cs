@@ -10,13 +10,13 @@ public class MovementManagerScript : NetworkBehaviour {
 
     public float dashForce;
     public float dashDuration;
-    public float nextDash = 0.0f;
-    public float cooldown = 5.0f;
+    public float nextDash;
+    public float cooldown;
 
     public float jumpForce;
 
-    public float deathDepth = 5f;
-    public int damage = 1;
+    public float deathDepth;
+    public int damage;
 
     private Rigidbody rb;
 
@@ -25,19 +25,27 @@ public class MovementManagerScript : NetworkBehaviour {
 
     Health health;
 
+    private bool tempDeath = false;
+
     void Start () {
         rb = GetComponent<Rigidbody>();
         health = gameObject.GetComponent<Health>();
+        tempDeath = false;
     }
 
 	void Update () {
         if (isLocalPlayer)
         {
-            if(transform.position.y < deathDepth)
+            if (transform.position.y < deathDepth && tempDeath == false)
             {
-                Debug.Log("damage");
-                health.TakeDamage(damage);
+                Debug.Log("dmg");
+                tempDeath = true;
+                health.CmdTakeDamage(damage);
                 rb.velocity = Vector3.zero;
+            }
+            else if (transform.position.y > deathDepth)
+            {
+                tempDeath = false;
             }
             // Tasten auslesen um Bewegungsvektor herauszufinden
             moveVector = Vector3.zero;
