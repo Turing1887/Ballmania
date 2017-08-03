@@ -38,7 +38,6 @@ public class MovementManagerScript : NetworkBehaviour {
         {
             if (transform.position.y < deathDepth && tempDeath == false)
             {
-                Debug.Log("dmg");
                 tempDeath = true;
                 health.CmdTakeDamage(damage);
                 rb.velocity = Vector3.zero;
@@ -89,6 +88,7 @@ public class MovementManagerScript : NetworkBehaviour {
             // Dash Ende
 
             // Bewegung anwenden
+            Debug.Log(isGrounded);
             if (isGrounded)
             {
                 if (rb.velocity.magnitude > maxVel && nextDash >= dashDuration)
@@ -108,7 +108,7 @@ public class MovementManagerScript : NetworkBehaviour {
 
     // Collision Detection
     private bool isGrounded = false;
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         // Ground Check
         if (collision.gameObject.tag == "Ground")
@@ -119,17 +119,22 @@ public class MovementManagerScript : NetworkBehaviour {
         {
             isGrounded = false;
         }
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
         // Player Check
         if (collision.gameObject.tag == "Player")
         {
             MovementManagerScript mvManSc = collision.gameObject.GetComponent<MovementManagerScript>();
             // Dashed der andere Spieler gerade?
+
             if (mvManSc.nextDash <= 3f)
             {
                 Debug.Log("Collision");
             }
         }
+        
 
 
     }

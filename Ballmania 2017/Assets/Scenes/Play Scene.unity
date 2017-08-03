@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boundingBoxPadding: 2
   minimumSize: 8
-  zoomSpeed: 0.1
+  zoomSpeed: 5
   normPos: {x: 0, y: 39, z: -24}
 --- !u!1001 &1315095659
 Prefab:
