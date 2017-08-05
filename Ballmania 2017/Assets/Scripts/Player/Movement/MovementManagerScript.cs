@@ -126,6 +126,12 @@ public class MovementManagerScript : NetworkBehaviour {
         // Player Check
         if (collision.gameObject.tag == "Player")
         {
+			string player_name = collision.gameObject.name;
+			if (Network.isServer) {
+				RpcMovePlayer (player_name);
+			} else {
+				CmdMovePlayer (player_name);
+			}
             MovementManagerScript mvManSc = collision.gameObject.GetComponent<MovementManagerScript>();
             // Dashed der andere Spieler gerade?
 
@@ -138,6 +144,16 @@ public class MovementManagerScript : NetworkBehaviour {
 
 
     }
+
+	[Command]
+	void CmdMovePlayer(string name){
+		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
+	}
+	[ClientRpc]
+	void RpcMovePlayer(string name){
+		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
+	}
+
     // Collision Detection Ende
 
     // Collision Exit
