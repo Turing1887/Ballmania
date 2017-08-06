@@ -54,10 +54,14 @@ namespace Prototype.NetworkLobby
             if (isLocalPlayer)
             {
                 SetupLocalPlayer();
+				Debug.Log ("Is Local");
+				GameObject.Find ("LobbyManager").gameObject.GetComponent<LobbyManager> ().SendMessage ("SetLocalPlayer",this.gameObject);
             }
             else
             {
                 SetupOtherPlayer();
+				Debug.Log ("Is Server");
+				GameObject.Find ("LobbyManager").gameObject.GetComponent<LobbyManager> ().SendMessage ("SetServerPlayer",this.gameObject);
             }
 
             //setup the player data on UI. The value are SyncVar so the player

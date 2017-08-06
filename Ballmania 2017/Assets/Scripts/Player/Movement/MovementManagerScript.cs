@@ -48,6 +48,7 @@ public class MovementManagerScript : NetworkBehaviour {
             }
             // Tasten auslesen um Bewegungsvektor herauszufinden
             moveVector = Vector3.zero;
+//			Debug.Log (Input.GetAxis("Vertical"));
             moveVector.x = Input.GetAxis("Horizontal") * Time.deltaTime;
             moveVector.z = Input.GetAxis("Vertical") * Time.deltaTime;
 
@@ -88,7 +89,7 @@ public class MovementManagerScript : NetworkBehaviour {
             // Dash Ende
 
             // Bewegung anwenden
-            Debug.Log(isGrounded);
+//            Debug.Log(isGrounded);
             if (isGrounded)
             {
                 if (rb.velocity.magnitude > maxVel && nextDash >= dashDuration)

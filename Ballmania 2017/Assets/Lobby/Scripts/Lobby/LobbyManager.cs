@@ -335,6 +335,34 @@ namespace Prototype.NetworkLobby
             return true;
         }
 
+		public GameObject local_player;
+
+		public void SetLocalPlayer(GameObject localPlayer){
+			Debug.Log (localPlayer.name);
+			local_player = localPlayer;
+		}
+		public void SetServerPlayer(GameObject serverPlayer){
+			Debug.Log (serverPlayer.name);
+			local_player = serverPlayer;
+		}
+
+		public GameObject redball;
+		public GameObject blueball;
+
+		public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId){
+			GameObject gamePlayer = base.OnLobbyServerCreateGamePlayer (conn,playerControllerId);
+			GameObject player = local_player;
+		
+
+			if(player.gameObject.GetComponent<LobbyPlayer>().playerColor == Color.red){
+				base.gamePlayerPrefab = redball; 
+			}
+			else if(player.gameObject.GetComponent<LobbyPlayer>().playerColor == Color.blue){
+				base.gamePlayerPrefab = blueball; 
+			}
+			return gamePlayer;
+		}
+
         // --- Countdown management
 
         public override void OnLobbyServerPlayersReady()

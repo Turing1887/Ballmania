@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 22247284}
   - component: {fileID: 11473722}
   - component: {fileID: 11413860}
+  - component: {fileID: 114215319331221868}
   m_Layer: 5
   m_Name: JoinButton
   m_TagString: Untagged
@@ -1660,3 +1661,14 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 155390}
   m_IsPrefabParent: 1
+--- !u!114 &114215319331221868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dae6489e4dfc76a45a6002eab1e4fa7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
