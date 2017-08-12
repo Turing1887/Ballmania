@@ -365,9 +365,9 @@ namespace Prototype.NetworkLobby
 //			return gamePlayer;
 //		}
 
-//		public override void OnServerAddPlayer(NetworkConnection conn,short playerControllerId){
-//			gamePlayerPrefab = blueball;
-//		}
+		public void OnServerAddPlayer(NetworkConnection conn,short playerControllerId){
+			gamePlayerPrefab = blueball;
+		}
 
         // --- Countdown management
 
