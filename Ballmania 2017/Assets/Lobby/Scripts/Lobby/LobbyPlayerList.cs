@@ -48,16 +48,16 @@ namespace Prototype.NetworkLobby
             player.transform.SetParent(playerListContentTransform, false);
             addButtonRow.transform.SetAsLastSibling();
 
-            PlayerListModified();
+            PlayerListModified(player);
         }
 
         public void RemovePlayer(LobbyPlayer player)
         {
             _players.Remove(player);
-            PlayerListModified();
+            PlayerListModified(player);
         }
 
-        public void PlayerListModified()
+		public void PlayerListModified(LobbyPlayer player)
         {
             int i = 0;
             foreach (LobbyPlayer p in _players)
@@ -65,6 +65,7 @@ namespace Prototype.NetworkLobby
                 p.OnPlayerListChanged(i);
                 ++i;
             }
+			player.playernumber = i;
         }
     }
 }

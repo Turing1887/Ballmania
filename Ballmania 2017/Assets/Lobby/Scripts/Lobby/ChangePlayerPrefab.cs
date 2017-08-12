@@ -16,11 +16,11 @@ public class ChangePlayerPrefab : LobbyHook {
 
 	public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer){
 		
-		if(lobbyPlayer.GetComponent<LobbyPlayer>().playerColor == Color.red){
+		if(lobbyPlayer.gameObject.GetComponent<LobbyPlayer> ().playernumber == 1){
 			manager.gameObject.GetComponent<LobbyManager> ().gamePlayerPrefab = redball;
 //			Debug.Log (lobbyPlayer.name);
 		}
-		else if(lobbyPlayer.GetComponent<LobbyPlayer>().playerColor == Color.blue){
+		else {
 			manager.gameObject.GetComponent<LobbyManager> ().gamePlayerPrefab = blueball;
 //			Debug.Log (lobbyPlayer.name);
 		}

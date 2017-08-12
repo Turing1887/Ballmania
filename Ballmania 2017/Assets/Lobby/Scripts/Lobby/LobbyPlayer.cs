@@ -20,7 +20,7 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
-
+		public int playernumber;
         public GameObject localIcone;
         public GameObject remoteIcone;
 
@@ -61,7 +61,7 @@ namespace Prototype.NetworkLobby
             {
                 SetupOtherPlayer();
 				Debug.Log ("Is Server");
-				GameObject.Find ("LobbyManager").gameObject.GetComponent<LobbyManager> ().SendMessage ("SetServerPlayer",this.gameObject);
+//				GameObject.Find ("LobbyManager").gameObject.GetComponent<LobbyManager> ().SendMessage ("SetServerPlayer",this.gameObject);
             }
 
             //setup the player data on UI. The value are SyncVar so the player
