@@ -61,7 +61,7 @@ namespace Prototype.NetworkLobby
             else
             {
                 SetupOtherPlayer();
-				Debug.Log ("Is Server");
+//				Debug.Log ("Is Server");
 //				GameObject.Find ("LobbyManager").gameObject.GetComponent<LobbyManager> ().SendMessage ("SetServerPlayer",this.gameObject);
             }
 
@@ -169,7 +169,7 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
-				RpcChangeColor(playerColor);
+				CmdChangeColor(playerColor);
             }
             else
             {
@@ -251,8 +251,11 @@ namespace Prototype.NetworkLobby
         {
             CheckRemoveButton();
         }
-		[ClientRpc]
-		public void RpcChangeColor(Color color){
+		[Command]
+		public void CmdChangeColor(Color color){
+			if (!isLocalPlayer)
+				return;
+			
 			Debug.Log ("I'M DOIN IT");
 			if (color == Color.blue) {
 				Debug.Log ("Also is blue");

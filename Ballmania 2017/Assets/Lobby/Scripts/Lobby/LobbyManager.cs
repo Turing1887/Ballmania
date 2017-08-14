@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 
 namespace Prototype.NetworkLobby
@@ -53,6 +55,8 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+		short[] playerID = new short[8];
+
         void Start()
         {
             s_Singleton = this;
@@ -63,7 +67,9 @@ namespace Prototype.NetworkLobby
             GetComponent<Canvas>().enabled = true;
 
             DontDestroyOnLoad(gameObject);
-
+			for(short i = 0;i < 8;i++){
+				playerID [i] = 12;
+			}
             SetServerInfo("Offline", "None");
         }
 
@@ -377,6 +383,23 @@ namespace Prototype.NetworkLobby
 //		}
 
         // --- Countdown management
+
+
+
+//		List<short> playerId = new List<short>();
+
+
+		public override void OnServerAddPlayer(NetworkConnection conn,short playerControllerId){
+
+			for(short i = 0;i<8;i++){
+				if(playerID[i] == 12){
+					Debug.Log (playerControllerId);
+					playerID [i] = playerControllerId;
+					break;
+				}
+			}
+			base.OnServerAddPlayer (conn,playerControllerId);
+		}
 
         public override void OnLobbyServerPlayersReady()
         {
