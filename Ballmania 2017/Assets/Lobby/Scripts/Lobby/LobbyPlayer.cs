@@ -169,6 +169,7 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
+				RpcChangeColor(playerColor);
             }
             else
             {
@@ -300,9 +301,10 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
-			RpcChangeColor(playerColor);
+
 			
         }
+
 
         [Command]
         public void CmdNameChanged(string name)
