@@ -23,7 +23,8 @@ namespace Prototype.NetworkLobby
 		public int playernumber;
         public GameObject localIcone;
         public GameObject remoteIcone;
-
+		public GameObject blueball;
+		public GameObject redball;
         //OnMyName function will be invoked on clients when server change the value of playerName
         [SyncVar(hook = "OnMyName")]
         public string playerName = "";
@@ -141,6 +142,8 @@ namespace Prototype.NetworkLobby
             if (LobbyManager.s_Singleton != null) LobbyManager.s_Singleton.OnPlayersNumberModified(0);
         }
 
+	
+
         //This enable/disable the remove button depending on if that is the only local player or not
         public void CheckRemoveButton()
         {
@@ -247,7 +250,17 @@ namespace Prototype.NetworkLobby
         {
             CheckRemoveButton();
         }
-
+		[ClientRpc]
+		public void RpcChangeColor(Color color){
+			Debug.Log ("I'M DOIN IT");
+			if (color == Color.blue) {
+				Debug.Log ("Also is blue");
+				LobbyManager.s_Singleton.gamePlayerPrefab = blueball;
+//				GameObject.Find("LobbyManager").GetComponent<LobbyManager>().gamePlayerPrefab = blueball;
+			} else {
+				LobbyManager.s_Singleton.gamePlayerPrefab = redball;
+			}
+		}
         //====== Server Command
 
         [Command]
@@ -287,6 +300,8 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
+			RpcChangeColor(playerColor);
+			
         }
 
         [Command]

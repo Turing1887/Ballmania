@@ -981,8 +981,11 @@ MonoBehaviour:
   readyButton: {fileID: 11413860}
   waitingPlayerButton: {fileID: 11405868}
   removePlayerButton: {fileID: 11443358}
+  playernumber: 0
   localIcone: {fileID: 153088}
   remoteIcone: {fileID: 189178}
+  blueball: {fileID: 1404151047020190, guid: 8e3c347f0e4c72d4d9c3f713cb72eeaf, type: 2}
+  redball: {fileID: 1914674775078002, guid: a1869b30ec5de1e47903652232b29636, type: 2}
   playerName: 
   playerColor: {r: 1, g: 1, b: 1, a: 1}
   OddRowColor: {r: 0.98039216, g: 0.98039216, b: 0.98039216, a: 1}
@@ -1672,3 +1675,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dae6489e4dfc76a45a6002eab1e4fa7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lobbyManager: {fileID: 0}
+  changePrefab: {fileID: 0}
+  blueball: {fileID: 0}

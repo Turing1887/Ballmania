@@ -14,6 +14,8 @@ public class ChangePlayerPrefab : LobbyHook {
 		lobbyManager = GameObject.Find ("LobbyManager");
 	}
 
+
+
 	public override void OnLobbyServerSceneLoadedForPlayer(NetworkManager manager, GameObject lobbyPlayer, GameObject gamePlayer){
 		
 		if(lobbyPlayer.gameObject.GetComponent<LobbyPlayer> ().playernumber == 1){

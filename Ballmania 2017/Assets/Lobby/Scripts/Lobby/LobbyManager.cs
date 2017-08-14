@@ -14,7 +14,7 @@ namespace Prototype.NetworkLobby
         static short MsgKicked = MsgType.Highest + 1;
 
         static public LobbyManager s_Singleton;
-
+		public ChangePlayerPrefabOnJoin changePlayer;
 
         [Header("Unity UI Lobby")]
         [Tooltip("Time in second between all players ready & match start")]
@@ -168,7 +168,7 @@ namespace Prototype.NetworkLobby
 
         public void AddLocalPlayer()
         {
-			gamePlayerPrefab = blueball;
+//			gamePlayerPrefab = blueball;
             TryToAddPlayer();
         }
 
@@ -349,7 +349,7 @@ namespace Prototype.NetworkLobby
 //		}
 //
 //		public GameObject redball;
-		public GameObject blueball;
+//		public GameObject blueball;
 //
 //		public override GameObject OnLobbyServerCreateGamePlayer(NetworkConnection conn, short playerControllerId){
 //			GameObject gamePlayer = base.OnLobbyServerCreateGamePlayer (conn,playerControllerId);
@@ -364,10 +364,17 @@ namespace Prototype.NetworkLobby
 //			}
 //			return gamePlayer;
 //		}
+	
 
-		public void OnServerAddPlayer(NetworkConnection conn,short playerControllerId){
-			gamePlayerPrefab = blueball;
-		}
+//		public void OnServerAddPlayer(NetworkConnection conn,short playerControllerId){
+//			if(!Network.isServer){
+//				changePlayer.RpcChangeColor (playerPrefab);
+//			}
+//		}
+//
+//		public void ChangePrefab(GameObject newPrefab){
+//			playerPrefab = newPrefab;
+//		}
 
         // --- Countdown management
 
