@@ -169,7 +169,13 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
-				CmdChangeColor(playerColor);
+				if(isServer){
+					CmdChangeColor(playerColor);
+				}
+				else if(isClient){
+					RpcChangeColor (playerColor);
+				}
+
             }
             else
             {
@@ -251,10 +257,24 @@ namespace Prototype.NetworkLobby
         {
             CheckRemoveButton();
         }
+		[ClientRpc]
+		public void RpcChangeColor(Color color){
+			//			if (!isLocalPlayer)
+			//				return;
+
+			Debug.Log ("I'M DOIN IT");
+			if (color == Color.blue) {
+				Debug.Log ("Also is blue");
+				LobbyManager.s_Singleton.gamePlayerPrefab = blueball;
+				//				GameObject.Find("LobbyManager").GetComponent<LobbyManager>().gamePlayerPrefab = blueball;
+			} else {
+				LobbyManager.s_Singleton.gamePlayerPrefab = redball;
+			}
+		}
 		[Command]
 		public void CmdChangeColor(Color color){
-			if (!isLocalPlayer)
-				return;
+//			if (!isLocalPlayer)
+//				return;
 			
 			Debug.Log ("I'M DOIN IT");
 			if (color == Color.blue) {
