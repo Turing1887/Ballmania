@@ -120,7 +120,7 @@ MonoBehaviour:
   cooldown: 2
   jumpForce: 0
   deathDepth: -5
-  damage: 50
+  damage: 0
 --- !u!114 &114090651072912558
 MonoBehaviour:
   m_ObjectHideFlags: 1

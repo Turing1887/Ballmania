@@ -19,6 +19,7 @@ public class MovementManagerScript : NetworkBehaviour {
     public int damage;
 
     private Rigidbody rb;
+    private Renderer ren;
 
     private Vector3 moveVector;
     private float verticalVelocity;
@@ -27,8 +28,16 @@ public class MovementManagerScript : NetworkBehaviour {
 
     private bool tempDeath = false;
 
+    [SyncVar]
+    public Color color;
+    [SyncVar]
+    public string playerName;
+
     void Start () {
         rb = GetComponent<Rigidbody>();
+        ren = GetComponent<Renderer>();
+        ren.material.color = color;
+        this.name = playerName;
         health = gameObject.GetComponent<Health>();
         tempDeath = false;
     }
@@ -88,7 +97,6 @@ public class MovementManagerScript : NetworkBehaviour {
             // Dash Ende
 
             // Bewegung anwenden
-            Debug.Log(isGrounded);
             if (isGrounded)
             {
                 if (rb.velocity.magnitude > maxVel && nextDash >= dashDuration)
@@ -127,22 +135,17 @@ public class MovementManagerScript : NetworkBehaviour {
         if (collision.gameObject.tag == "Player")
         {
 			string player_name = collision.gameObject.name;
-			if (Network.isServer) {
-				RpcMovePlayer (player_name);
-			} else {
-				CmdMovePlayer (player_name);
-			}
-            MovementManagerScript mvManSc = collision.gameObject.GetComponent<MovementManagerScript>();
-            // Dashed der andere Spieler gerade?
-
-            if (mvManSc.nextDash <= 3f)
+            if (nextDash <= 3f)
             {
-                Debug.Log("Collision");
+                if (Network.isServer) {
+				   RpcMovePlayer (player_name);
+                    Debug.Log("Rpc");
+			    } else {
+				   CmdMovePlayer (player_name);
+                    Debug.Log("Cmd");
+                }
             }
         }
-        
-
-
     }
 
 	[Command]

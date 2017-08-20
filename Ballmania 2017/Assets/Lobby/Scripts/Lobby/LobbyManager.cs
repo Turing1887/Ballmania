@@ -51,12 +51,12 @@ namespace Prototype.NetworkLobby
         
         protected ulong _currentMatchID;
 
-        protected LobbyHook _lobbyHooks;
+        protected GameLobbyHook _lobbyHooks;
 
         void Start()
         {
             s_Singleton = this;
-            _lobbyHooks = GetComponent<Prototype.NetworkLobby.LobbyHook>();
+            _lobbyHooks = GetComponent<Prototype.NetworkLobby.GameLobbyHook>();
             currentPanel = mainMenuPanel;
 
             backButton.gameObject.SetActive(false);
@@ -328,7 +328,6 @@ namespace Prototype.NetworkLobby
         {
             //This hook allows you to apply state data from the lobby-player to the game-player
             //just subclass "LobbyHook" and add it to the lobby object.
-
             if (_lobbyHooks)
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
 
