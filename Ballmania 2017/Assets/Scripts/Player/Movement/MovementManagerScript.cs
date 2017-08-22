@@ -10,6 +10,7 @@ public class MovementManagerScript : NetworkBehaviour {
 
     public float dashForce;
     public float dashDuration;
+    [SyncVar]
     public float nextDash;
     public float cooldown;
 
@@ -135,25 +136,35 @@ public class MovementManagerScript : NetworkBehaviour {
         if (collision.gameObject.tag == "Player")
         {
 			string player_name = collision.gameObject.name;
-            if (nextDash <= 3f)
+            if (nextDash <= cooldown && nextDash > 0f)
             {
-                if (Network.isServer) {
-				   RpcMovePlayer (player_name);
-                    Debug.Log("Rpc");
-			    } else {
-				   CmdMovePlayer (player_name);
-                    Debug.Log("Cmd");
+                //MovementManagerScript enemy = collision.gameObject.GetComponent<MovementManagerScript>();
+                //enemy.Hit(rb.velocity);
+                collision.gameObject.SendMessage("Hit",rb.velocity);
+                //MovePlayer(player_name);
+                /*
+                if (!GetComponent<NetworkIdentity>().isServer) {
+                    CmdMovePlayer(player_name);
+                } else {
+                    MovePlayer(player_name);
                 }
+                */
             }
         }
     }
 
+    public void Hit(Vector3 vel) 
+    {
+        Debug.Log(vel);
+        rb.AddForce(vel * 100);
+    }
+
 	[Command]
 	void CmdMovePlayer(string name){
-		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
+		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce * 10, ForceMode.Impulse);
 	}
-	[ClientRpc]
-	void RpcMovePlayer(string name){
+	//[ClientRpc]
+	void MovePlayer(string name){
 		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
 	}
 
