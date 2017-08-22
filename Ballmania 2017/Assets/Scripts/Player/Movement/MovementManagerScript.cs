@@ -138,17 +138,7 @@ public class MovementManagerScript : NetworkBehaviour {
 			string player_name = collision.gameObject.name;
             if (nextDash <= cooldown && nextDash > 0f)
             {
-                //MovementManagerScript enemy = collision.gameObject.GetComponent<MovementManagerScript>();
-                //enemy.Hit(rb.velocity);
                 collision.gameObject.SendMessage("Hit",rb.velocity);
-                //MovePlayer(player_name);
-                /*
-                if (!GetComponent<NetworkIdentity>().isServer) {
-                    CmdMovePlayer(player_name);
-                } else {
-                    MovePlayer(player_name);
-                }
-                */
             }
         }
     }
@@ -156,17 +146,8 @@ public class MovementManagerScript : NetworkBehaviour {
     public void Hit(Vector3 vel) 
     {
         Debug.Log(vel);
-        rb.AddForce(vel * 100);
+        rb.AddForce(rb.velocity - vel * 10);
     }
-
-	[Command]
-	void CmdMovePlayer(string name){
-		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce * 10, ForceMode.Impulse);
-	}
-	//[ClientRpc]
-	void MovePlayer(string name){
-		GameObject.Find (name).gameObject.GetComponent<Rigidbody> ().AddForce (moveVector * Time.deltaTime * dashForce, ForceMode.Impulse);
-	}
 
     // Collision Detection Ende
 
