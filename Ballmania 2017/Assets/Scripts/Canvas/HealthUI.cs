@@ -6,9 +6,12 @@ using UnityEngine.UI;
 public class HealthUI : MonoBehaviour {
 
     GameObject[] healthUIs;
+	public List<string> activePlayers = new List<string>();
+	int listLength;
 
 	void Start () {
-        StartCoroutine(WaitSec());
+//        StartCoroutine(WaitSec());
+		SetHealthUI();
 	}
 	
 	IEnumerator WaitSec()
@@ -23,4 +26,17 @@ public class HealthUI : MonoBehaviour {
             healthUIs[i].transform.position = tempPos;
         }
     }
+
+	void SetHealthUI(){
+		listLength = activePlayers.Count;
+		healthUIs = GameObject.FindGameObjectsWithTag("HealthUI");
+		for(int i = 0;i < listLength;i++){
+			healthUIs [i].GetComponent<CanvasGroup> ().alpha = 1;
+			healthUIs[i].GetComponentInChildren<Text>().text = activePlayers[i];
+			healthUIs[i].name = activePlayers[i];
+		}
+
+	}
+
+
 }

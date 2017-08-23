@@ -120,7 +120,7 @@ MonoBehaviour:
   cooldown: 2
   jumpForce: 0
   deathDepth: -5
-  damage: 0
+  damage: 1
   color: {r: 0, g: 0, b: 0, a: 0}
   playerName: 
 --- !u!114 &114090651072912558
@@ -166,7 +166,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64dbfec86e953b54ea5e3f356a14fe56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
+  currentHealth: 3
+  lifePoints: []
 --- !u!114 &114900353095840568
 MonoBehaviour:
   m_ObjectHideFlags: 1

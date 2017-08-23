@@ -8,9 +8,10 @@ public class Health : NetworkBehaviour {
 
     public const int maxHealth = 5;
 
-    [SyncVar]
+	[SyncVar(hook="OnHealthChange")]
     public int currentHealth = maxHealth;
 
+	public GameObject[] lifePoints;
     //public GameObject healthUI;
 
     //private RectTransform healthBar;
@@ -18,9 +19,11 @@ public class Health : NetworkBehaviour {
     private NetworkStartPosition[] spawnPoints;
 
 	void Start () {
+		lifePoints = new GameObject[3];
 		if(isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
+			SetHealthPoints ();
             /*
             GameObject playerUI = Instantiate(healthUI) as GameObject;
             playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
@@ -41,10 +44,10 @@ public class Health : NetworkBehaviour {
         RpcRespawn();
     }
 
-    void OnChangeHealth (int currentHealth)
-    {
-        //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
-    }
+//    void OnChangeHealth (int currentHealth)
+//    {
+//        //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
+//    }
 
     [ClientRpc]
     void RpcRespawn()
@@ -63,4 +66,23 @@ public class Health : NetworkBehaviour {
             transform.position = spawnPoint;
         }
     }
+
+	void SetHealthPoints(){
+		GameObject healthHUD = GameObject.Find ("HUDCanvas/" + gameObject.name);
+		Debug.Log (healthHUD.name);
+		for (int i = 0; i < healthHUD.transform.childCount; i++) {
+			Transform child = healthHUD.transform.GetChild (i);
+			if (child.gameObject.tag == "Lifepoint") {
+				Debug.Log ("Got it");
+				lifePoints [i] = child.gameObject;
+			}
+		}
+	}
+
+
+	void OnHealthChange(int health){
+		GameObject.Destroy (lifePoints[health]);
+	}
+
+
 }
