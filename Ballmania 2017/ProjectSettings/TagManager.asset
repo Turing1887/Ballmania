@@ -9,6 +9,7 @@ TagManager:
   - Canvas
   - HealthUI
   - PlayerInfo
+  - Lifepoint
   layers:
   - Default
   - TransparentFX
