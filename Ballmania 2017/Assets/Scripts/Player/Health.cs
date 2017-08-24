@@ -23,7 +23,7 @@ public class Health : NetworkBehaviour {
 		if(isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-			SetHealthPoints ();
+			CmdSetHealthPoints ();
             /*
             GameObject playerUI = Instantiate(healthUI) as GameObject;
             playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
@@ -66,8 +66,8 @@ public class Health : NetworkBehaviour {
             transform.position = spawnPoint;
         }
     }
-
-	void SetHealthPoints(){
+	[Command]
+	void CmdSetHealthPoints(){
 		GameObject healthHUD = GameObject.Find ("HUDCanvas/" + gameObject.name);
 		Debug.Log (healthHUD.name);
 		for (int i = 0; i < healthHUD.transform.childCount; i++) {

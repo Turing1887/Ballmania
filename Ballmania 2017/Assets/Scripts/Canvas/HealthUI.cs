@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class HealthUI : MonoBehaviour {
+public class HealthUI : NetworkBehaviour {
 
     GameObject[] healthUIs;
 	public List<string> activePlayers = new List<string>();
@@ -11,7 +12,7 @@ public class HealthUI : MonoBehaviour {
 
 	void Start () {
 //        StartCoroutine(WaitSec());
-		SetHealthUI();
+		CmdSetHealthUI();
 	}
 	
 	IEnumerator WaitSec()
@@ -26,8 +27,8 @@ public class HealthUI : MonoBehaviour {
             healthUIs[i].transform.position = tempPos;
         }
     }
-
-	void SetHealthUI(){
+	[Command]
+	void CmdSetHealthUI(){
 		listLength = activePlayers.Count;
 		healthUIs = GameObject.FindGameObjectsWithTag("HealthUI");
 		for(int i = 0;i < listLength;i++){
