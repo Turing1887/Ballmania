@@ -1,8 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class PUSpawnManagerScript : MonoBehaviour {
+public class PUSpawnManagerScript : NetworkBehaviour
+{
 
     public GameObject[] powerUps;
     public float spawnTime = 4f;
@@ -20,7 +22,8 @@ public class PUSpawnManagerScript : MonoBehaviour {
     }
 
     // Spawn Funktion
-    void Spawn()
+    [ClientRpc]
+    void RpcSpawn()
     {
         // Zufälliger Spawnpunkt
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);

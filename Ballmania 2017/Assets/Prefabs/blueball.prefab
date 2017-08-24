@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 135729283998452028}
   - component: {fileID: 114452449222199174}
   - component: {fileID: 114883177292654266}
+  - component: {fileID: 114670153501399918}
   m_Layer: 0
   m_Name: blueball
   m_TagString: Untagged
@@ -144,6 +145,29 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 1
   m_InterpolateMovement: 1
+--- !u!114 &114670153501399918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1404151047020190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbf6e376beb7df40ba34785ed591fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpeedUp: 0
+  isMassUp: 0
+  isDashUp: 0
+  durationSpeedUp: 4
+  addAccelerationSpeedUp: 10
+  addMaxSpeedUp: 5
+  setValueNextDashSuperDash: 0
+  durationSuperDash: 4
+  durationSuperMass: 4
+  addValuesForSuperMass: {x: 20, y: 20, z: 20}
+  addMassSuperMass: 20
+  addAccelerationSuperMass: 20
 --- !u!114 &114753995510816718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -188,6 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 100
+  lifePoints: []
 --- !u!135 &135729283998452028
 SphereCollider:
   m_ObjectHideFlags: 1

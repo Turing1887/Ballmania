@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 114900353095840568}
   - component: {fileID: 114060280362175320}
   - component: {fileID: 114413674992428212}
+  - component: {fileID: 114050275464843708}
   m_Layer: 0
   m_Name: red_ball
   m_TagString: Player
@@ -101,6 +102,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &114050275464843708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1914674775078002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcbf6e376beb7df40ba34785ed591fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isSpeedUp: 0
+  isMassUp: 0
+  isDashUp: 0
+  durationSpeedUp: 4
+  addAccelerationSpeedUp: 10
+  addMaxSpeedUp: 5
+  setValueNextDashSuperDash: 0
+  durationSuperDash: 4
+  durationSuperMass: 4
+  addValuesForSuperMass: {x: 20, y: 20, z: 20}
+  addMassSuperMass: 20
+  addAccelerationSuperMass: 20
 --- !u!114 &114060280362175320
 MonoBehaviour:
   m_ObjectHideFlags: 1
