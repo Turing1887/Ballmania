@@ -13,7 +13,12 @@ public class HealthUI : NetworkBehaviour {
 
 	void Start () {
 //        StartCoroutine(WaitSec());
-		RpcSetHealthUI();
+		if(Network.isServer){
+			RpcSetHealthUI();
+		}
+		else if(Network.isClient){
+			CmdSetHealthUI ();
+		}
 	}
 	
 //	IEnumerator WaitSec()
@@ -31,6 +36,22 @@ public class HealthUI : NetworkBehaviour {
 	[ClientRpc]
 	void RpcSetHealthUI(){
 //		activePlayers.Add ();
+		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
+		for(int i = 0;i < activePlayers_new.Length;i++){
+			activePlayers.Add (activePlayers_new[i].name);
+		}
+		listLength = activePlayers.Count;
+		healthUIs = GameObject.FindGameObjectsWithTag("HealthUI");
+		for(int i = 0;i < listLength;i++){
+			healthUIs [i].GetComponent<CanvasGroup> ().alpha = 1;
+			healthUIs[i].GetComponentInChildren<Text>().text = activePlayers[i];
+			healthUIs[i].name = activePlayers[i];
+		}
+
+	}
+	[Command]
+	void CmdSetHealthUI(){
+		//		activePlayers.Add ();
 		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
 		for(int i = 0;i < activePlayers_new.Length;i++){
 			activePlayers.Add (activePlayers_new[i].name);
