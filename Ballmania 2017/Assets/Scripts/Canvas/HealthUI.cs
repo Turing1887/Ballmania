@@ -13,7 +13,7 @@ public class HealthUI : NetworkBehaviour {
 
 	void Start () {
 //        StartCoroutine(WaitSec());
-		CmdSetHealthUI();
+		RpcSetHealthUI();
 	}
 	
 //	IEnumerator WaitSec()
@@ -28,8 +28,8 @@ public class HealthUI : NetworkBehaviour {
 //            healthUIs[i].transform.position = tempPos;
 //        }
 //    }
-	[Command]
-	void CmdSetHealthUI(){
+	[ClientRpc]
+	void RpcSetHealthUI(){
 //		activePlayers.Add ();
 		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
 		for(int i = 0;i < activePlayers_new.Length;i++){

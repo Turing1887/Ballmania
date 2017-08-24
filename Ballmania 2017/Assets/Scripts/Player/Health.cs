@@ -10,20 +10,28 @@ public class Health : NetworkBehaviour {
 
 	[SyncVar(hook="OnHealthChange")]
     public int currentHealth = maxHealth;
-
+	public GameObject healthHUD;
 	public GameObject[] lifePoints;
+	bool health_points_set;
     //public GameObject healthUI;
+//	public GameObject[] healthUIs;
+//	public List<string> activePlayers = new List<string>();
+//	int listLength;
+//	public GameObject[] activePlayers_new;
 
     //private RectTransform healthBar;
 
     private NetworkStartPosition[] spawnPoints;
 
 	void Start () {
+		health_points_set = true;
 		lifePoints = new GameObject[3];
 		if(isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-			CmdSetHealthPoints ();
+//			RpcSetHealthUI();
+		
+				
             /*
             GameObject playerUI = Instantiate(healthUI) as GameObject;
             playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
@@ -31,7 +39,15 @@ public class Health : NetworkBehaviour {
             */
         }
 	}
-	
+
+	void Update(){
+		if(ClientScene.ready && health_points_set){
+			SetHealthPoints ();
+			health_points_set = false;
+		}
+			
+	}
+
     [Command]
 	public void CmdTakeDamage(int amount)
     {
@@ -66,9 +82,10 @@ public class Health : NetworkBehaviour {
             transform.position = spawnPoint;
         }
     }
-	[Command]
-	void CmdSetHealthPoints(){
-		GameObject healthHUD = GameObject.Find ("HUDCanvas/" + gameObject.name);
+
+	void SetHealthPoints(){
+		StartCoroutine (WaitASec());
+		healthHUD = GameObject.Find ("HUDCanvas/" + gameObject.name);
 		Debug.Log (healthHUD.name);
 		for (int i = 0; i < healthHUD.transform.childCount; i++) {
 			Transform child = healthHUD.transform.GetChild (i);
@@ -79,10 +96,21 @@ public class Health : NetworkBehaviour {
 		}
 	}
 
+	IEnumerator WaitASec(){
+		yield return new WaitForSeconds (4);
+	}
 
 	void OnHealthChange(int health){
+		RpcDestroyHealthpoint (health);
+	}
+
+
+	[ClientRpc]
+	void RpcDestroyHealthpoint(int health){
 		GameObject.Destroy (lifePoints[health]);
 	}
+
+
 
 
 }
