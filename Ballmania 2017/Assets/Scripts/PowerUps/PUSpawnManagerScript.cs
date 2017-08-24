@@ -17,7 +17,7 @@ public class PUSpawnManagerScript : NetworkBehaviour
 
         if (spawning)
         {
-            InvokeRepeating("Spawn", spawnTime, spawnTime);
+            InvokeRepeating("RpcSpawn", spawnTime, spawnTime);
         }
     }
 
@@ -39,7 +39,8 @@ public class PUSpawnManagerScript : NetworkBehaviour
         else
         {
             int powerUpIndex = Random.Range(0, powerUps.Length);
-            Instantiate(powerUps[powerUpIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            GameObject puClone = (GameObject)Instantiate(powerUps[powerUpIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            NetworkServer.Spawn(puClone);
         }
     }
 
