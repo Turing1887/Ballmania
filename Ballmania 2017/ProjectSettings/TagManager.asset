@@ -10,6 +10,9 @@ TagManager:
   - HealthUI
   - PlayerInfo
   - Lifepoint
+  - SuperWeight
+  - SuperSpeed
+  - SuperDash
   layers:
   - Default
   - TransparentFX
