@@ -95,7 +95,6 @@ public class PUManagerScript : MonoBehaviour {
 
     public IEnumerator SpeedUp()
     {
-        Debug.Log("Speed");
         yield return new WaitForSeconds(durationSpeedUp);
         playerManager.acceleration -= addAccelerationSpeedUp;
         playerManager.maxVel -= addMaxSpeedUp;
@@ -106,7 +105,6 @@ public class PUManagerScript : MonoBehaviour {
 
     public IEnumerator MultipleDash()
     {
-        Debug.Log("Dash");
         yield return new WaitForSeconds(durationSuperDash);
         playerManager.cooldown = cacheCooldown;
         isDashUp = false;
@@ -115,7 +113,6 @@ public class PUManagerScript : MonoBehaviour {
 
     public IEnumerator SuperMass()
     {
-        Debug.Log("Mass");
         yield return new WaitForSeconds(durationSuperMass);
         transform.localScale -= addValuesForSuperMass;
         GetComponent<Rigidbody>().mass -= addMassSuperMass;

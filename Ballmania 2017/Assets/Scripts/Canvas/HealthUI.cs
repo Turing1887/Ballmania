@@ -12,15 +12,7 @@ public class HealthUI : NetworkBehaviour {
 	public GameObject[] activePlayers_new;
 
 	void Start () {
-//        StartCoroutine(WaitSec());
-//		if(isServer){
-//			Debug.Log ("isServer");
-//			RpcSetHealthUI();
-//		}
-//		else if(isClient){
-//			Debug.Log ("isClient");
-			CmdSetHealthUI ();
-//		}
+        StartCoroutine(Wait());
 	}
 	
 //	IEnumerator WaitSec()
@@ -51,8 +43,8 @@ public class HealthUI : NetworkBehaviour {
 //		}
 //
 //	}
-	[Command]
-	void CmdSetHealthUI(){
+	[ClientRpc]
+	void RpcSetHealthUI(){
 		//		activePlayers.Add ();
 		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
 		for(int i = 0;i < activePlayers_new.Length;i++){
@@ -67,6 +59,12 @@ public class HealthUI : NetworkBehaviour {
 		}
 
 	}
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2f);
+        RpcSetHealthUI();
+    }
 
 
 }

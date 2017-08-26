@@ -85,28 +85,31 @@ public class Health : NetworkBehaviour {
 
 	void SetHealthPoints(){
 		StartCoroutine (WaitASec());
-		healthHUD = GameObject.Find ("HUDCanvas/" + gameObject.name);
-		Debug.Log (healthHUD.name);
-		for (int i = 0; i < healthHUD.transform.childCount; i++) {
-			Transform child = healthHUD.transform.GetChild (i);
-			if (child.gameObject.tag == "Lifepoint") {
-				Debug.Log ("Got it");
-				lifePoints [i] = child.gameObject;
-			}
-		}
+
 	}
 
 	IEnumerator WaitASec(){
 		yield return new WaitForSeconds (4);
-	}
+        healthHUD = GameObject.Find("HUDCanvas/" + gameObject.name);
+        Debug.Log(healthHUD.name);
+        for (int i = 0; i < healthHUD.transform.childCount; i++)
+        {
+            Transform child = healthHUD.transform.GetChild(i);
+            if (child.gameObject.tag == "Lifepoint")
+            {
+                Debug.Log("Got it");
+                lifePoints[i] = child.gameObject;
+            }
+        }
+    }
 
 	void OnHealthChange(int health){
-		RpcDestroyHealthpoint (health);
+		CmdDestroyHealthpoint (health);
 	}
 
 
-	[ClientRpc]
-	void RpcDestroyHealthpoint(int health){
+	[Command]
+	void CmdDestroyHealthpoint(int health){
 		GameObject.Destroy (lifePoints[health]);
 	}
 
