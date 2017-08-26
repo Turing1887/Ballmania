@@ -17,13 +17,12 @@ public class PUSpawnManagerScript : NetworkBehaviour
 
         if (spawning)
         {
-            InvokeRepeating("RpcSpawn", spawnTime, spawnTime);
+            InvokeRepeating("Spawn", spawnTime, spawnTime);
         }
     }
 
     // Spawn Funktion
-    [ClientRpc]
-    void RpcSpawn()
+    void Spawn()
     {
         // Zufälliger Spawnpunkt
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
