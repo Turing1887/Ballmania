@@ -787,6 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthUIs: []
   activePlayers: []
+  activePlayers_new: []
 --- !u!114 &1144900985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -830,7 +831,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1159196939
 GameObject:
@@ -1561,7 +1562,7 @@ MonoBehaviour:
     i13: 0
     i14: 0
     i15: 0
-  m_ServerOnly: 0
+  m_ServerOnly: 1
   m_LocalPlayerAuthority: 0
 --- !u!1 &1705193746
 GameObject:

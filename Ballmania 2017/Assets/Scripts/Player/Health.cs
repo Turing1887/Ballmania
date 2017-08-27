@@ -10,6 +10,7 @@ public class Health : NetworkBehaviour {
 
 	[SyncVar(hook="OnHealthChange")]
 	public int currentHealth = maxHealth;
+
 	public GameObject healthHUD;
 	public GameObject[] lifePoints;
 	bool health_points_set;
@@ -48,22 +49,30 @@ public class Health : NetworkBehaviour {
 
 	}
 
-	[Command]
-	public void CmdTakeDamage(int amount)
+	public void TakeDamage(int amount)
 	{
 		Debug.Log("damage");
-		currentHealth -= amount;
+        if(isServer)
+        {
+            currentHealth -= amount;
+            RpcRespawn();
+        }
+		else
+        {
+            CmdTakeDamage(amount);
+        }
 		if(currentHealth <= 0)
 		{
 			Destroy(gameObject);
 		}
-		RpcRespawn();
+		//RpcRespawn();
 	}
 
-	//    void OnChangeHealth (int currentHealth)
-	//    {
-	//        //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
-	//    }
+    [Command]
+    void CmdTakeDamage(int amount)
+    {
+        TakeDamage(amount);
+    }
 
 	[ClientRpc]
 	void RpcRespawn()

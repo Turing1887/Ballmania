@@ -63,7 +63,10 @@ public class HealthUI : NetworkBehaviour {
 	public IEnumerator Wait()
 	{
 		yield return new WaitForSeconds(2f);
-		RpcSetHealthUI();
+        if (isServer)
+        {
+            RpcSetHealthUI();
+        }
 	}
 
 

@@ -38,7 +38,8 @@ public class PUSpawnManagerScript : NetworkBehaviour
         else
         {
             int powerUpIndex = Random.Range(0, powerUps.Length);
-            Instantiate(powerUps[powerUpIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            GameObject pU = (GameObject)Instantiate(powerUps[powerUpIndex], spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+            NetworkServer.Spawn(pU);
         }
     }
 

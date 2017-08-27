@@ -49,7 +49,9 @@ public class MovementManagerScript : NetworkBehaviour {
             if (transform.position.y < deathDepth && tempDeath == false)
             {
                 tempDeath = true;
-                health.CmdTakeDamage(damage);
+                Debug.Log(isServer);
+                    health.TakeDamage(damage);
+                
                 rb.velocity = Vector3.zero;
             }
             else if (transform.position.y > deathDepth)
