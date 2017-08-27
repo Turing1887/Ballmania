@@ -13,15 +13,9 @@ public class Health : NetworkBehaviour {
 	public GameObject healthHUD;
 	public GameObject[] lifePoints;
 	bool health_points_set;
-    //public GameObject healthUI;
-//	public GameObject[] healthUIs;
-//	public List<string> activePlayers = new List<string>();
-//	int listLength;
-//	public GameObject[] activePlayers_new;
-
-    //private RectTransform healthBar;
 
     private NetworkStartPosition[] spawnPoints;
+    private GameObject gameOverPanel;
 
 	void Start () {
 		health_points_set = true;
@@ -29,46 +23,42 @@ public class Health : NetworkBehaviour {
 		if(isLocalPlayer)
         {
             spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-//			RpcSetHealthUI();
-		
-				
-            /*
-            GameObject playerUI = Instantiate(healthUI) as GameObject;
-            playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            healthBar = (RectTransform)playerUI.gameObject.transform.GetChild(1).GetChild(0);
-            */
         }
 	}
 
 	void Update(){
 		if(ClientScene.ready && health_points_set){
-			SetHealthPoints ();
-			health_points_set = false;
+            SetHealthPoints();
+            health_points_set = false;
 		}
 			
 	}
 
-    [Command]
-	public void CmdTakeDamage(int amount)
+	public void TakeDamage(int amount)
     {
+        if (!isServer)
+            return;
+
         Debug.Log("damage");
         currentHealth -= amount;
         if(currentHealth <= 0)
         {
-                Destroy(gameObject);
+            if(isLocalPlayer)
+            {
+                DeathScreen();
+            }
+            
+            Destroy(gameObject);
         }
         RpcRespawn();
     }
 
-//    void OnChangeHealth (int currentHealth)
-//    {
-//        //healthBar.sizeDelta = new Vector2(currentHealth, healthBar.sizeDelta.y);
-//    }
 
     [ClientRpc]
     void RpcRespawn()
     {
-        if(isLocalPlayer)
+        Debug.Log("respawn");
+        if (isLocalPlayer)
         {
             // default Respawn
             Vector3 spawnPoint = Vector3.zero;
@@ -91,13 +81,11 @@ public class Health : NetworkBehaviour {
 	IEnumerator WaitASec(){
 		yield return new WaitForSeconds (4);
         healthHUD = GameObject.Find("HUDCanvas/" + gameObject.name);
-        Debug.Log(healthHUD.name);
         for (int i = 0; i < healthHUD.transform.childCount; i++)
         {
             Transform child = healthHUD.transform.GetChild(i);
             if (child.gameObject.tag == "Lifepoint")
             {
-                Debug.Log("Got it");
                 lifePoints[i] = child.gameObject;
             }
         }
@@ -113,7 +101,13 @@ public class Health : NetworkBehaviour {
 		GameObject.Destroy (lifePoints[health]);
 	}
 
-
-
-
+    void DeathScreen()
+    {
+            gameOverPanel = GameObject.Find("HUDCanvas/GameOverPanel");
+            Debug.Log(gameOverPanel);
+            Color tempCol = gameOverPanel.GetComponent<Image>().color;
+            tempCol.a = 0.5f;
+            gameOverPanel.GetComponent<Image>().color = tempCol;
+            gameOverPanel.transform.Find("Defeat").gameObject.SetActive(true);
+    }
 }
