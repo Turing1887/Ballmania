@@ -17,7 +17,7 @@ public class PUSpawnManagerScript : NetworkBehaviour
 
         if (spawning)
         {
-            InvokeRepeating("RpcSpawn", spawnTime, spawnTime);
+            InvokeRepeating("Spawn", spawnTime, spawnTime);
         }
     }
 
