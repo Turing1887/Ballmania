@@ -12,8 +12,12 @@ public class HealthUI : NetworkBehaviour {
 	public GameObject[] activePlayers_new;
 
 	void Start () {
+<<<<<<< HEAD
 //        StartCoroutine(WaitSec());
 		CmdSetHealthUI();
+=======
+        StartCoroutine(Wait());
+>>>>>>> 6d510ea75ab318d64059b8b253c2fa140af3808c
 	}
 	
 //	IEnumerator WaitSec()
@@ -28,9 +32,31 @@ public class HealthUI : NetworkBehaviour {
 //            healthUIs[i].transform.position = tempPos;
 //        }
 //    }
+<<<<<<< HEAD
 	[Command]
 	void CmdSetHealthUI(){
 //		activePlayers.Add ();
+=======
+//	[ClientRpc]
+//	void RpcSetHealthUI(){
+////		activePlayers.Add ();
+//		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
+//		for(int i = 0;i < activePlayers_new.Length;i++){
+//			activePlayers.Add (activePlayers_new[i].name);
+//		}
+//		listLength = activePlayers.Count;
+//		healthUIs = GameObject.FindGameObjectsWithTag("HealthUI");
+//		for(int i = 0;i < listLength;i++){
+//			healthUIs [i].GetComponent<CanvasGroup> ().alpha = 1;
+//			healthUIs[i].GetComponentInChildren<Text>().text = activePlayers[i];
+//			healthUIs[i].name = activePlayers[i];
+//		}
+//
+//	}
+	[ClientRpc]
+	void RpcSetHealthUI(){
+		//		activePlayers.Add ();
+>>>>>>> 6d510ea75ab318d64059b8b253c2fa140af3808c
 		activePlayers_new = GameObject.FindGameObjectsWithTag("Player"); 
 		for(int i = 0;i < activePlayers_new.Length;i++){
 			activePlayers.Add (activePlayers_new[i].name);
@@ -44,6 +70,12 @@ public class HealthUI : NetworkBehaviour {
 		}
 
 	}
+
+    public IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2f);
+        RpcSetHealthUI();
+    }
 
 
 }

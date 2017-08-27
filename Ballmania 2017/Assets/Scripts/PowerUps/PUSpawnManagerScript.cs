@@ -22,8 +22,7 @@ public class PUSpawnManagerScript : NetworkBehaviour
     }
 
     // Spawn Funktion
-    [ClientRpc]
-    void RpcSpawn()
+    void Spawn()
     {
         // Zufälliger Spawnpunkt
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);

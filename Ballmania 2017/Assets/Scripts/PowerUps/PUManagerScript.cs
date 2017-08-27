@@ -5,17 +5,24 @@ using UnityEngine;
 public class PUManagerScript : MonoBehaviour {
 
     // Bools für PowerUps
+    [Header("Power Ups")]
     public bool isSpeedUp;
     public bool isMassUp;
     public bool isDashUp;
     // SpeedUp
+    [Space]
+    [Header("Speed")]
     public float durationSpeedUp;
     public float addAccelerationSpeedUp;
     public float addMaxSpeedUp;
     // DashUp
+    [Space]
+    [Header("Dash")]
     public float setValueNextDashSuperDash;
     public float durationSuperDash;
     // MassUp
+    [Space]
+    [Header("Mass")]
     public float durationSuperMass;
     public Vector3 addValuesForSuperMass;
     public float addMassSuperMass;
@@ -46,11 +53,15 @@ public class PUManagerScript : MonoBehaviour {
                 playerManager.acceleration += addAccelerationSpeedUp;
                 playerManager.maxVel += addMaxSpeedUp;
                 tempSpeed = 1;
+                StartCoroutine(SpeedUp());
             }
-            StartCoroutine(SpeedUp());
+        }
+        else
+        {
+            StopCoroutine(SpeedUp());
         }
 
-        else if (isMassUp == true)
+        if (isMassUp == true)
         {
             if (tempMass == 0)
             {
@@ -58,24 +69,27 @@ public class PUManagerScript : MonoBehaviour {
                 GetComponent<Rigidbody>().mass += addMassSuperMass;
                 playerManager.acceleration += addAccelerationSuperMass;
                 tempMass = 1;
+                StartCoroutine(SuperMass());
             }
-            StartCoroutine(SuperMass());
+        }
+        else
+        {
+            StopCoroutine(SuperMass());
         }
 
-        else if (isDashUp == true)
+        if (isDashUp == true)
         {
             if (tempDash == 0)
             {
                 cacheCooldown = playerManager.cooldown;
                 playerManager.cooldown = setValueNextDashSuperDash;
                 tempDash = 1;
+                StartCoroutine(MultipleDash());
             }
-            StartCoroutine(MultipleDash());
         }
-
         else
         {
-            StopAllCoroutines();
+            StopCoroutine(MultipleDash());
         }
     }
 

@@ -117,13 +117,13 @@ MonoBehaviour:
   isMassUp: 0
   isDashUp: 0
   durationSpeedUp: 4
-  addAccelerationSpeedUp: 10
+  addAccelerationSpeedUp: 5
   addMaxSpeedUp: 5
   setValueNextDashSuperDash: 0
   durationSuperDash: 4
   durationSuperMass: 4
   addValuesForSuperMass: {x: 20, y: 20, z: 20}
-  addMassSuperMass: 20
+  addMassSuperMass: 50
   addAccelerationSuperMass: 20
 --- !u!114 &114060280362175320
 MonoBehaviour:
@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 3
+  healthHUD: {fileID: 0}
   lifePoints: []
 --- !u!114 &114900353095840568
 MonoBehaviour:
