@@ -49,14 +49,13 @@ public class Health : NetworkBehaviour {
         }
 		if(currentHealth <= 0)
 		{
-			Destroy(gameObject);
-		}
+            Destroy(gameObject, 0.1f);
+        }
 	}
 
     [Command]
     void CmdTakeDamage(int amount)
     {
-        Debug.Log("Hallo");
         TakeDamage(amount);
     }
 
@@ -86,15 +85,13 @@ public class Health : NetworkBehaviour {
 	}
 
 	IEnumerator WaitASec(){
-		yield return new WaitForSeconds (4);
+		yield return new WaitForSeconds (0.2f);
 		healthHUD = GameObject.Find("HUDCanvas/" + gameObject.name);
-		Debug.Log(healthHUD.name);
 		for (int i = 0; i < healthHUD.transform.childCount; i++)
 		{
 			Transform child = healthHUD.transform.GetChild(i);
 			if (child.gameObject.tag == "Lifepoint")
 			{
-				Debug.Log("Got it");
 				lifePoints[i] = child.gameObject;
 			}
 		}
@@ -102,16 +99,11 @@ public class Health : NetworkBehaviour {
 
 	void OnHealthChange(int health){
         currentHealth = health;
-		CmdDestroyHealthpoint (health);
+        DestroyHealthPoint(health);
 	}
 
-
-	[Command]
-	void CmdDestroyHealthpoint(int health){
-		GameObject.Destroy (lifePoints[health]);
-	}
-
-
-
-
+    void DestroyHealthPoint(int health)
+    {
+        GameObject.Destroy(lifePoints[health]);
+    }
 }
