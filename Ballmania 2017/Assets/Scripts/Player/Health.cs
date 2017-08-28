@@ -14,30 +14,17 @@ public class Health : NetworkBehaviour {
 	public GameObject healthHUD;
 	public GameObject[] lifePoints;
 	bool health_points_set;
-	//public GameObject healthUI;
-	//	public GameObject[] healthUIs;
-	//	public List<string> activePlayers = new List<string>();
-	//	int listLength;
-	//	public GameObject[] activePlayers_new;
-
-	//private RectTransform healthBar;
 
 	private NetworkStartPosition[] spawnPoints;
+    private PUManagerScript puManager;
 
 	void Start () {
+        puManager = GetComponent<PUManagerScript>();
 		health_points_set = true;
 		lifePoints = new GameObject[3];
 		if(isLocalPlayer)
 		{
 			spawnPoints = FindObjectsOfType<NetworkStartPosition>();
-			//			RpcSetHealthUI();
-
-
-			/*
-            GameObject playerUI = Instantiate(healthUI) as GameObject;
-            playerUI.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, false);
-            healthBar = (RectTransform)playerUI.gameObject.transform.GetChild(1).GetChild(0);
-            */
 		}
 	}
 
@@ -51,7 +38,6 @@ public class Health : NetworkBehaviour {
 
 	public void TakeDamage(int amount)
 	{
-		Debug.Log("damage");
         if(isServer)
         {
             currentHealth -= amount;
@@ -65,12 +51,12 @@ public class Health : NetworkBehaviour {
 		{
 			Destroy(gameObject);
 		}
-		//RpcRespawn();
 	}
 
     [Command]
     void CmdTakeDamage(int amount)
     {
+        Debug.Log("Hallo");
         TakeDamage(amount);
     }
 
@@ -79,6 +65,8 @@ public class Health : NetworkBehaviour {
 	{
 		if(isLocalPlayer)
 		{
+            puManager.Reset();
+            puManager.StopAllCoroutines();
 			// default Respawn
 			Vector3 spawnPoint = Vector3.zero;
 
@@ -113,6 +101,7 @@ public class Health : NetworkBehaviour {
 	}
 
 	void OnHealthChange(int health){
+        currentHealth = health;
 		CmdDestroyHealthpoint (health);
 	}
 

@@ -29,10 +29,11 @@ public class PUManagerScript : MonoBehaviour {
     public float addAccelerationSuperMass;
 
     float cacheCooldown;
-    // Temp Vars
-    int tempSpeed = 0;
-    int tempMass = 0;
-    int tempDash = 0;
+
+    //shorts to check how many of each Coroutines are running. Important for Reset
+    private short CR_speed = 0;
+    private short CR_mass = 0;
+    private bool CR_dash = false;
 
     MovementManagerScript playerManager;
 
@@ -48,13 +49,10 @@ public class PUManagerScript : MonoBehaviour {
     {
         if (isSpeedUp == true)
         {
-            if (tempSpeed == 0)
-            {
-                playerManager.acceleration += addAccelerationSpeedUp;
-                playerManager.maxVel += addMaxSpeedUp;
-                tempSpeed = 1;
-                StartCoroutine(SpeedUp());
-            }
+            isSpeedUp = false;
+            playerManager.acceleration += addAccelerationSpeedUp;
+            playerManager.maxVel += addMaxSpeedUp;
+            StartCoroutine(SpeedUp());
         }
         else
         {
@@ -63,14 +61,11 @@ public class PUManagerScript : MonoBehaviour {
 
         if (isMassUp == true)
         {
-            if (tempMass == 0)
-            {
-                transform.localScale += addValuesForSuperMass;
-                GetComponent<Rigidbody>().mass += addMassSuperMass;
-                playerManager.acceleration += addAccelerationSuperMass;
-                tempMass = 1;
-                StartCoroutine(SuperMass());
-            }
+            isMassUp = false;
+            transform.localScale += addValuesForSuperMass;
+            GetComponent<Rigidbody>().mass += addMassSuperMass;
+            playerManager.acceleration += addAccelerationSuperMass;
+            StartCoroutine(SuperMass());
         }
         else
         {
@@ -79,13 +74,10 @@ public class PUManagerScript : MonoBehaviour {
 
         if (isDashUp == true)
         {
-            if (tempDash == 0)
-            {
-                cacheCooldown = playerManager.cooldown;
-                playerManager.cooldown = setValueNextDashSuperDash;
-                tempDash = 1;
-                StartCoroutine(MultipleDash());
-            }
+            isDashUp = false;
+            cacheCooldown = playerManager.cooldown;
+            playerManager.cooldown = setValueNextDashSuperDash;
+            StartCoroutine(MultipleDash());
         }
         else
         {
@@ -95,29 +87,52 @@ public class PUManagerScript : MonoBehaviour {
 
     public IEnumerator SpeedUp()
     {
+        CR_speed += 1;
         yield return new WaitForSeconds(durationSpeedUp);
         playerManager.acceleration -= addAccelerationSpeedUp;
         playerManager.maxVel -= addMaxSpeedUp;
-        isSpeedUp = false;
-        tempSpeed = 0;
+        CR_speed -= 1;
     }
 
 
     public IEnumerator MultipleDash()
     {
+        CR_dash = true;
         yield return new WaitForSeconds(durationSuperDash);
         playerManager.cooldown = cacheCooldown;
-        isDashUp = false;
-        tempDash = 0;
+        CR_dash = false;
     }
 
     public IEnumerator SuperMass()
     {
+        CR_mass += 1;
         yield return new WaitForSeconds(durationSuperMass);
         transform.localScale -= addValuesForSuperMass;
         GetComponent<Rigidbody>().mass -= addMassSuperMass;
         playerManager.acceleration -= addAccelerationSuperMass;
-        isMassUp = false;
-        tempMass = 0;
+        CR_mass -= 1;
+    }
+
+    public void Reset()
+    {
+        if(CR_speed != 0)
+        {
+            playerManager.acceleration -= CR_speed * addAccelerationSpeedUp;
+            playerManager.maxVel -= CR_speed * addMaxSpeedUp;
+        }
+        if(CR_mass != 0)
+        {
+            transform.localScale -= CR_mass * addValuesForSuperMass;
+            GetComponent<Rigidbody>().mass -= CR_mass * addMassSuperMass;
+            playerManager.acceleration -= CR_mass * addAccelerationSuperMass;
+        }
+        if(CR_dash)
+        {
+            playerManager.cooldown = cacheCooldown;
+        }
+        CR_speed = 0;
+        CR_mass = 0;
+        CR_dash = false;
+            
     }
 }

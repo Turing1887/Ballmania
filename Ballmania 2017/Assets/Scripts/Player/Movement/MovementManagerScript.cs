@@ -49,9 +49,10 @@ public class MovementManagerScript : NetworkBehaviour {
             if (transform.position.y < deathDepth && tempDeath == false)
             {
                 tempDeath = true;
-                Debug.Log(isServer);
+                if(isLocalPlayer)
+                {
                     health.TakeDamage(damage);
-                
+                }
                 rb.velocity = Vector3.zero;
             }
             else if (transform.position.y > deathDepth)
@@ -75,7 +76,6 @@ public class MovementManagerScript : NetworkBehaviour {
             }
             else
             {
-                //Debug.Log("Not Grounded");
                 verticalVelocity = 0;
             }
             // Jump Ende

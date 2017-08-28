@@ -14,13 +14,6 @@ namespace Prototype.NetworkLobby
             MovementManagerScript player = gamePlayer.GetComponent<MovementManagerScript>();
             player.playerName = lobby.playerName;
             player.color = lobby.playerColor;
-	
-
-//			HealthUI healthUI = GameObject.Find ("GameManager").GetComponent<HealthUI>();
-////			healthUI = NetworkServer.FindLocalObject();
-//			healthUI.activePlayers.Add (player.playerName);
-
-
         }
     }
 }
