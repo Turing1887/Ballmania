@@ -1,0 +1,6 @@
+Da wir uns nicht sicher waren ob eine .exe notwendig ist, haben wir es leider versäumt eine zu erstellen.
+Leider hatte bei uns nur Vincent die Möglichkeit dazu, da das Unityprojekt an seinen Account gekoppelt ist
+und die Unity services (Networking etc.) dadurch nur bei einer von ihm erstellten .exe laufen. 
+
+Deshalb ist das Spiel momentan nur im Unity Editor spielbar. 
+Wir laden die Build Version so schnell wie möglich bei Github hoch.
