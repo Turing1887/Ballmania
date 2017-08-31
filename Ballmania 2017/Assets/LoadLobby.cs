@@ -12,6 +12,10 @@ public class LoadLobby : MonoBehaviour {
 		gameObject.GetComponent<Button> ().onClick.AddListener (Load);
 	}
 	void Load(){
+		if(GameObject.Find("LobbyManager")){
+			GameObject.Find ("LobbyManager").GetComponent<CanvasGroup>().alpha = 1;
+			GameObject.Find ("LobbyManager").GetComponent<CanvasGroup>().blocksRaycasts = true;
+		}
 		SceneManager.LoadScene ("Lobby Scene");
 	}
 	
